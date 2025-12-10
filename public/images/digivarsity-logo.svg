@@ -1,0 +1,17 @@
+<svg width="1024" height="400" viewBox="0 0 1024 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Logo Icon with Red, Green, Blue petals -->
+  <g transform="translate(826, 10)">
+    <!-- Red petal (top) -->
+    <path d="M 74 0 Q 148 0 148 74 Q 148 148 74 148 L 74 74 Z" fill="#FF6B6B"/>
+    <!-- Green petal (bottom left) -->
+    <path d="M 0 74 Q 0 148 74 148 Q 148 148 74 74 Z" fill="#51CF66"/>
+    <!-- Blue petal (bottom right) -->
+    <path d="M 74 74 Q 148 74 148 148 Q 148 222 74 148 Z" fill="#2196F3"/>
+    <!-- Registered trademark symbol -->
+    <circle cx="168" cy="30" r="20" fill="white" stroke="white" stroke-width="3"/>
+    <text x="168" y="40" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="black" text-anchor="middle">R</text>
+  </g>
+
+  <!-- Digivarsity Text -->
+  <text x="10" y="280" font-family="Arial, sans-serif" font-size="180" font-weight="900" fill="white" letter-spacing="-5">Digivarsity</text>
+</svg>

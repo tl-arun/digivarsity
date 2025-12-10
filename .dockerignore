@@ -1,0 +1,72 @@
+# Dependencies
+/vendor
+/node_modules
+
+# Build outputs
+/public/build
+/public/hot
+/public/storage
+
+# Environment files
+!.env.example
+!.env.production
+
+# Storage
+/storage/*.key
+/storage/pail
+/storage/logs/*
+!/storage/logs/.gitkeep
+
+# Cache
+/.phpunit.cache
+.phpunit.result.cache
+/bootstrap/cache/*
+!/bootstrap/cache/.gitkeep
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# IDE
+/.idea
+/.vscode
+/.fleet
+/.nova
+/.zed
+.phpactor.json
+
+# Testing
+/tests
+phpunit.xml
+
+# Development
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+auth.json
+
+# Documentation
+*.md
+!README.md
+
+# Docker files
+docker-compose*.yml
+Dockerfile
+.dockerignore
+
+# Scripts
+*.bat
+*.sh
+!docker/*.sh
+
+# Python test files
+*.py
+test_*.json
+verify-*.php
+test_*.php
+
+# Postman collections
+*.postman_collection.json
+

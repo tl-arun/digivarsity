@@ -1,0 +1,1657 @@
+@extends('layouts.app')
+
+@section('title', 'Home - Digivarsity')
+
+@section('content')
+
+<!-- Career Quiz Modal -->
+@include('components.career-quiz-modal')
+
+<!-- Resume Analyzer Modal -->
+@include('components.resume-analyzer-modal')
+
+<style>
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+    }
+
+    .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 0.8s ease-out;
+    }
+
+    .animate-on-scroll.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .float-animation {
+        animation: float 3s ease-in-out infinite;
+    }
+
+    .gradient-text {
+        background: linear-gradient(135deg, #7C3AED 0%, #EC4899 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    /* Enhanced Animations */
+    @keyframes pulse-glow {
+        0%, 100% {
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.4);
+        }
+        50% {
+            box-shadow: 0 0 40px rgba(102, 126, 234, 0.8);
+        }
+    }
+
+    @keyframes bounce-in {
+        0% {
+            transform: scale(0.3);
+            opacity: 0;
+        }
+        50% {
+            transform: scale(1.05);
+        }
+        70% {
+            transform: scale(0.9);
+        }
+        100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slide-up {
+        from {
+            transform: translateY(100px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes rotate-gradient {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    .pulse-glow {
+        animation: pulse-glow 2s ease-in-out infinite;
+    }
+
+    .bounce-in {
+        animation: bounce-in 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .gradient-animated {
+        background: linear-gradient(270deg, #1e1b4b, #581c87, #7e22ce, #a855f7);
+        background-size: 800% 800%;
+        animation: rotate-gradient 8s ease infinite;
+    }
+
+    /* Glassmorphism Effect */
+    .glass {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Neon Glow Effect */
+    .neon-glow {
+        text-shadow: 0 0 10px rgba(102, 126, 234, 0.8),
+                     0 0 20px rgba(102, 126, 234, 0.6),
+                     0 0 30px rgba(102, 126, 234, 0.4);
+    }
+
+    /* Card Hover Effects */
+    .card-hover {
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .card-hover::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        transition: left 0.5s;
+    }
+
+    .card-hover:hover::before {
+        left: 100%;
+    }
+
+    .card-hover:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+
+    /* Floating Shapes Background */
+    .floating-shapes {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 0;
+    }
+
+    .shape {
+        position: absolute;
+        opacity: 0.1;
+        animation: float 20s infinite ease-in-out;
+    }
+
+    .shape:nth-child(1) {
+        top: 10%;
+        left: 10%;
+        animation-delay: 0s;
+    }
+
+    .shape:nth-child(2) {
+        top: 60%;
+        right: 10%;
+        animation-delay: 2s;
+    }
+
+    .shape:nth-child(3) {
+        bottom: 10%;
+        left: 50%;
+        animation-delay: 4s;
+    }
+
+    /* Image Carousel Animations */
+    @keyframes scroll-left {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+    }
+
+    @keyframes scroll-right {
+        0% { transform: translateX(-50%); }
+        100% { transform: translateX(0); }
+    }
+
+    @keyframes scroll-left-slow {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+    }
+
+    @keyframes fade-slide {
+        0%, 100% { opacity: 0.7; }
+        50% { opacity: 1; }
+    }
+
+    .scroll-container {
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+        padding: 1rem 0;
+    }
+
+    .scroll-content {
+        display: flex;
+        animation: scroll-left 40s linear infinite;
+        will-change: transform;
+    }
+
+    .scroll-content:hover {
+        animation-play-state: paused;
+    }
+
+    .scroll-content-reverse {
+        display: flex;
+        animation: scroll-right 45s linear infinite;
+        will-change: transform;
+    }
+
+    .scroll-content-reverse:hover {
+        animation-play-state: paused;
+    }
+
+    .scroll-content-slow {
+        display: flex;
+        animation: scroll-left-slow 60s linear infinite;
+        will-change: transform;
+    }
+
+    .scroll-content-slow:hover {
+        animation-play-state: paused;
+    }
+
+    .scroll-item {
+        flex: 0 0 auto;
+        margin: 0 1rem;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+    }
+
+    .scroll-item:hover {
+        transform: scale(1.08) translateY(-8px);
+        z-index: 10;
+        filter: brightness(1.1);
+    }
+
+    .scroll-item::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 1rem;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
+
+    .scroll-item:hover::after {
+        opacity: 1;
+    }
+
+    /* Fade edges effect with gradient */
+    .scroll-container::before,
+    .scroll-container::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 150px;
+        z-index: 2;
+        pointer-events: none;
+    }
+
+    .scroll-container::before {
+        left: 0;
+        background: linear-gradient(to right, rgba(249, 250, 251, 1), rgba(249, 250, 251, 0));
+    }
+
+    .scroll-container::after {
+        right: 0;
+        background: linear-gradient(to left, rgba(249, 250, 251, 1), rgba(249, 250, 251, 0));
+    }
+
+    .scroll-container.white-bg::before {
+        background: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+    }
+
+    .scroll-container.white-bg::after {
+        background: linear-gradient(to left, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+    }
+
+    /* Shimmer effect on load */
+    @keyframes shimmer {
+        0% { background-position: -1000px 0; }
+        100% { background-position: 1000px 0; }
+    }
+
+    .shimmer {
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        background-size: 1000px 100%;
+        animation: shimmer 2s infinite;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+    }
+
+    .mobile-menu.active {
+        max-height: 500px;
+    }
+
+</style>
+
+<!-- Enhanced Navigation -->
+<nav class="bg-white shadow-lg sticky top-0 z-50 backdrop-blur-lg bg-opacity-95">
+    <div class="container mx-auto px-4 sm:px-6">
+        <div class="flex justify-between items-center py-4">
+            <!-- Logo -->
+            <a href="/" class="flex items-center space-x-3 group">
+                <div class="bg-gradient-to-br from-indigo-600 to-purple-600 p-2 rounded-xl transform group-hover:rotate-12 transition-transform">
+                    <i class="fas fa-graduation-cap text-white text-2xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-black bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                        Digivarsity
+                    </h1>
+                    <p class="text-xs text-gray-500 font-semibold">Transform Your Future</p>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="/" class="text-indigo-600 font-bold transition flex items-center space-x-2 border-b-2 border-indigo-600">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="/programs" class="text-gray-700 hover:text-indigo-600 font-semibold transition flex items-center space-x-2">
+                    <i class="fas fa-book-open"></i>
+                    <span>Programs</span>
+                </a>
+                <a href="#universities-scroll" class="text-gray-700 hover:text-indigo-600 font-semibold transition flex items-center space-x-2">
+                    <i class="fas fa-university"></i>
+                    <span>Universities</span>
+                </a>
+                <a href="#testimonials" class="text-gray-700 hover:text-indigo-600 font-semibold transition flex items-center space-x-2">
+                    <i class="fas fa-star"></i>
+                    <span>Success Stories</span>
+                </a>
+                <a href="#contact" class="text-gray-700 hover:text-indigo-600 font-semibold transition flex items-center space-x-2">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>Contact</span>
+                </a>
+            </div>
+
+            <!-- CTA Button -->
+            <div class="hidden md:block">
+                <a href="/programs" class="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full font-bold hover:shadow-xl transform hover:scale-105 transition-all flex items-center space-x-2">
+                    <i class="fas fa-rocket"></i>
+                    <span>Get Started</span>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button onclick="toggleMobileMenu()" class="md:hidden text-gray-700 hover:text-indigo-600">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu md:hidden pb-4" style="display: none;">
+            <div class="flex flex-col space-y-3">
+                <a href="/" class="text-indigo-600 font-bold py-2 px-4 rounded-lg bg-indigo-50 flex items-center space-x-2">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="/programs" class="text-gray-700 hover:text-indigo-600 font-semibold py-2 px-4 rounded-lg hover:bg-indigo-50 transition flex items-center space-x-2">
+                    <i class="fas fa-book-open"></i>
+                    <span>Programs</span>
+                </a>
+                <a href="#universities-scroll" onclick="toggleMobileMenu()" class="text-gray-700 hover:text-indigo-600 font-semibold py-2 px-4 rounded-lg hover:bg-indigo-50 transition flex items-center space-x-2">
+                    <i class="fas fa-university"></i>
+                    <span>Universities</span>
+                </a>
+                <a href="#testimonials" onclick="toggleMobileMenu()" class="text-gray-700 hover:text-indigo-600 font-semibold py-2 px-4 rounded-lg hover:bg-indigo-50 transition flex items-center space-x-2">
+                    <i class="fas fa-star"></i>
+                    <span>Success Stories</span>
+                </a>
+                <a href="#contact" onclick="toggleMobileMenu()" class="text-gray-700 hover:text-indigo-600 font-semibold py-2 px-4 rounded-lg hover:bg-indigo-50 transition flex items-center space-x-2">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>Contact</span>
+                </a>
+                <a href="/programs" class="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full font-bold text-center">
+                    <i class="fas fa-rocket mr-2"></i>Get Started
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section with Enhanced Effects -->
+<section class="relative text-white py-40 overflow-hidden" id="hero-section">
+    <!-- Dynamic Background Images -->
+    @if($heroBackgrounds && $heroBackgrounds->count() > 0)
+        @foreach($heroBackgrounds as $index => $background)
+        <div class="hero-background absolute inset-0 bg-cover bg-center transition-opacity duration-1000 {{ $index === 0 ? 'opacity-100' : 'opacity-0' }}"
+             style="background-image: url('{{ $background->image_url }}');"
+             data-index="{{ $index }}">
+            <!-- Dark Overlay -->
+            <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        </div>
+        @endforeach
+    @else
+        <!-- Fallback Gradient Background -->
+        <div class="hero-background absolute inset-0 gradient-animated"></div>
+    @endif
+
+    <!-- Floating Shapes Background -->
+    <div class="floating-shapes">
+        <div class="shape">
+            <i class="fas fa-graduation-cap text-white text-9xl"></i>
+        </div>
+        <div class="shape">
+            <i class="fas fa-book text-white text-9xl"></i>
+        </div>
+        <div class="shape">
+            <i class="fas fa-trophy text-white text-9xl"></i>
+        </div>
+    </div>
+
+    <!-- Animated Particles -->
+    <div class="absolute inset-0 opacity-20">
+        <div class="absolute top-10 left-10 w-72 h-72 bg-white rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
+        <div class="absolute top-40 right-10 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl animate-pulse" style="animation-delay: 2s"></div>
+        <div class="absolute bottom-10 left-1/2 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl animate-pulse" style="animation-delay: 4s"></div>
+        <div class="absolute top-1/2 left-1/4 w-96 h-96 bg-yellow-300 rounded-full mix-blend-multiply filter blur-2xl animate-pulse" style="animation-delay: 1s"></div>
+        <div class="absolute bottom-20 right-1/4 w-96 h-96 bg-blue-300 rounded-full mix-blend-multiply filter blur-2xl animate-pulse" style="animation-delay: 3s"></div>
+    </div>
+
+    <div class="container mx-auto px-6 text-center relative z-10">
+        <!-- Animated Badge -->
+        <div class="inline-block mb-6 animate-on-scroll bounce-in">
+            <span class="glass px-6 py-3 rounded-full text-sm font-semibold inline-flex items-center space-x-2">
+                <i class="fas fa-fire text-yellow-300"></i>
+                <span>🎓 #1 Online Education Platform in India</span>
+            </span>
+        </div>
+
+        <h2 class="text-8xl font-black mb-6 animate-on-scroll neon-glow leading-tight">
+            Transform Your<br/>
+            <span class="text-yellow-300">Future Today!</span>
+        </h2>
+
+        <p class="text-3xl mb-4 font-semibold animate-on-scroll" style="animation-delay: 0.2s">
+            🚀 Your Gateway to Quality Education & Career Excellence
+        </p>
+
+        <p class="text-xl mb-8 opacity-90 max-w-3xl mx-auto animate-on-scroll" style="animation-delay: 0.3s">
+            Join <span class="font-bold text-yellow-300">10,000+</span> successful professionals who transformed their careers with world-class programs from top universities
+        </p>
+
+        <!-- Enhanced CTA Buttons -->
+        <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6 mb-12 animate-on-scroll" style="animation-delay: 0.4s">
+            <button onclick="openQuizModal()" class="group px-10 py-5 bg-white text-indigo-600 rounded-full font-bold text-lg inline-flex items-center shadow-2xl transform hover:scale-110 transition-all duration-300 pulse-glow">
+                <i class="fas fa-magic mr-3 group-hover:rotate-45 transition-transform"></i>
+                Find My Perfect Program
+                <i class="fas fa-arrow-right ml-3 group-hover:translate-x-2 transition-transform"></i>
+            </button>
+            <a href="/programs" class="group px-10 py-5 glass border-2 border-white text-white rounded-full font-bold text-lg inline-flex items-center transform hover:scale-110 transition-all duration-300 hover:bg-white hover:text-indigo-600">
+                <i class="fas fa-book-open mr-3"></i>
+                Browse All Programs
+            </a>
+        </div>
+
+        <!-- Trust Indicators -->
+        <div class="flex flex-wrap justify-center items-center space-x-8 text-sm opacity-90 animate-on-scroll" style="animation-delay: 0.5s">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-check-circle text-green-300"></i>
+                <span>100% Placement Support</span>
+            </div>
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-check-circle text-green-300"></i>
+                <span>Industry Recognized</span>
+            </div>
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-check-circle text-green-300"></i>
+                <span>Flexible Learning</span>
+            </div>
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-check-circle text-green-300"></i>
+                <span>EMI Available</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <i class="fas fa-chevron-down text-white text-3xl opacity-70"></i>
+    </div>
+</section>
+
+
+<!-- AI Resume Analyzer Section -->
+<section class="py-24 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 relative overflow-hidden">
+    <!-- Animated Background -->
+    <div class="absolute inset-0 opacity-10">
+        <div class="absolute w-96 h-96 bg-white rounded-full top-10 left-10 animate-pulse"></div>
+        <div class="absolute w-96 h-96 bg-white rounded-full bottom-10 right-10 animate-pulse" style="animation-delay: 1s"></div>
+    </div>
+
+    <div class="container mx-auto px-6 relative z-10">
+        <div class="max-w-5xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Left Content -->
+                <div class="text-white">
+                    <div class="inline-block bg-white/20 px-4 py-2 rounded-full text-sm font-bold mb-6">
+                        🤖 AI-POWERED MATCHING
+                    </div>
+                    <h3 class="text-5xl font-black mb-6 leading-tight">
+                        Upload Your Resume,<br/>
+                        <span class="text-yellow-300">Find Your Perfect Program!</span>
+                    </h3>
+                    <p class="text-xl mb-8 opacity-90">
+                        Our AI analyzes your skills, experience, and qualifications to recommend the best programs tailored just for you.
+                    </p>
+
+                    <!-- Features List -->
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-start space-x-3">
+                            <div class="bg-white/20 rounded-full p-2 mt-1">
+                                <i class="fas fa-check text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">Instant Analysis</h4>
+                                <p class="opacity-90">Get results in seconds with our advanced AI</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="bg-white/20 rounded-full p-2 mt-1">
+                                <i class="fas fa-check text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">Smart Matching</h4>
+                                <p class="opacity-90">Programs matched to your skills and goals</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="bg-white/20 rounded-full p-2 mt-1">
+                                <i class="fas fa-check text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">100% Free</h4>
+                                <p class="opacity-90">No cost, no commitment required</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="openResumeModal()" class="group px-10 py-5 bg-white text-indigo-600 rounded-full font-bold text-xl inline-flex items-center shadow-2xl transform hover:scale-110 transition-all duration-300">
+                        <i class="fas fa-file-upload mr-3 group-hover:translate-y-[-4px] transition-transform"></i>
+                        Upload Resume Now
+                        <i class="fas fa-arrow-right ml-3 group-hover:translate-x-2 transition-transform"></i>
+                    </button>
+                </div>
+
+                <!-- Right Visual -->
+                <div class="relative">
+                    <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border-2 border-white/20">
+                        <div class="space-y-4">
+                            <!-- Step 1 -->
+                            <div class="bg-white rounded-2xl p-6 transform hover:scale-105 transition-all">
+                                <div class="flex items-center space-x-4">
+                                    <div class="bg-gradient-to-br from-indigo-500 to-purple-600 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl">
+                                        1
+                                    </div>
+                                    <div class="flex-1">
+                                        <h5 class="font-bold text-gray-800">Upload Resume</h5>
+                                        <p class="text-sm text-gray-600">PDF, DOC, or DOCX format</p>
+                                    </div>
+                                    <i class="fas fa-upload text-indigo-600 text-2xl"></i>
+                                </div>
+                            </div>
+
+                            <!-- Step 2 -->
+                            <div class="bg-white rounded-2xl p-6 transform hover:scale-105 transition-all" style="animation-delay: 0.1s">
+                                <div class="flex items-center space-x-4">
+                                    <div class="bg-gradient-to-br from-purple-500 to-pink-600 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl">
+                                        2
+                                    </div>
+                                    <div class="flex-1">
+                                        <h5 class="font-bold text-gray-800">AI Analysis</h5>
+                                        <p class="text-sm text-gray-600">Extract skills & keywords</p>
+                                    </div>
+                                    <i class="fas fa-brain text-purple-600 text-2xl"></i>
+                                </div>
+                            </div>
+
+                            <!-- Step 3 -->
+                            <div class="bg-white rounded-2xl p-6 transform hover:scale-105 transition-all" style="animation-delay: 0.2s">
+                                <div class="flex items-center space-x-4">
+                                    <div class="bg-gradient-to-br from-pink-500 to-red-600 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl">
+                                        3
+                                    </div>
+                                    <div class="flex-1">
+                                        <h5 class="font-bold text-gray-800">Get Matches</h5>
+                                        <p class="text-sm text-gray-600">Personalized recommendations</p>
+                                    </div>
+                                    <i class="fas fa-star text-yellow-500 text-2xl"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Trust Badge -->
+                        <div class="mt-6 text-center">
+                            <div class="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-white text-sm">
+                                <i class="fas fa-shield-alt text-green-300"></i>
+                                <span>Your data is 100% secure & confidential</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Enhanced Stats Section with Emojis -->
+<section class="py-24 bg-gradient-to-br from-white via-indigo-50 to-purple-50 relative overflow-hidden">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-5">
+        <div class="absolute top-0 left-0 w-full h-full" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%239C92AC\' fill-opacity=\'0.4\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+    </div>
+
+    <div class="container mx-auto px-6 relative z-10">
+        <!-- Section Header -->
+        <div class="text-center mb-16 animate-on-scroll">
+            <h3 class="text-5xl font-black mb-4">
+                <span class="gradient-text">Our Impact in Numbers</span> 📊
+            </h3>
+            <p class="text-xl text-gray-600">Real results from real students</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <!-- Stat 1 -->
+            <div class="text-center animate-on-scroll card-hover bg-white rounded-3xl p-8 shadow-xl">
+                <div class="bg-gradient-to-br from-indigo-500 to-purple-600 w-28 h-28 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-2xl pulse-glow transform rotate-6 hover:rotate-0 transition-transform">
+                    <i class="fas fa-graduation-cap text-white text-5xl"></i>
+                </div>
+                <p class="text-7xl font-black text-indigo-600 mb-3">
+                    <span class="counter" data-target="10">0</span>+
+                </p>
+                <p class="text-gray-700 font-bold text-xl mb-2">Programs</p>
+                <p class="text-gray-500 text-sm">🎓 World-class courses</p>
+            </div>
+
+            <!-- Stat 2 -->
+            <div class="text-center animate-on-scroll card-hover bg-white rounded-3xl p-8 shadow-xl" style="animation-delay: 0.1s">
+                <div class="bg-gradient-to-br from-green-500 to-teal-600 w-28 h-28 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-2xl pulse-glow transform -rotate-6 hover:rotate-0 transition-transform">
+                    <i class="fas fa-university text-white text-5xl"></i>
+                </div>
+                <p class="text-7xl font-black text-green-600 mb-3">
+                    <span class="counter" data-target="8">0</span>+
+                </p>
+                <p class="text-gray-700 font-bold text-xl mb-2">Universities</p>
+                <p class="text-gray-500 text-sm">🏛️ Top-ranked partners</p>
+            </div>
+
+            <!-- Stat 3 -->
+            <div class="text-center animate-on-scroll card-hover bg-white rounded-3xl p-8 shadow-xl" style="animation-delay: 0.2s">
+                <div class="bg-gradient-to-br from-purple-500 to-pink-600 w-28 h-28 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-2xl pulse-glow transform rotate-6 hover:rotate-0 transition-transform">
+                    <i class="fas fa-users text-white text-5xl"></i>
+                </div>
+                <p class="text-7xl font-black text-purple-600 mb-3">
+                    <span class="counter" data-target="10000">0</span>+
+                </p>
+                <p class="text-gray-700 font-bold text-xl mb-2">Happy Students</p>
+                <p class="text-gray-500 text-sm">👨‍🎓 Lives transformed</p>
+            </div>
+
+            <!-- Stat 4 -->
+            <div class="text-center animate-on-scroll card-hover bg-white rounded-3xl p-8 shadow-xl" style="animation-delay: 0.3s">
+                <div class="bg-gradient-to-br from-orange-500 to-red-600 w-28 h-28 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-2xl pulse-glow transform -rotate-6 hover:rotate-0 transition-transform">
+                    <i class="fas fa-trophy text-white text-5xl"></i>
+                </div>
+                <p class="text-7xl font-black text-orange-600 mb-3">
+                    <span class="counter" data-target="95">0</span>%
+                </p>
+                <p class="text-gray-700 font-bold text-xl mb-2">Success Rate</p>
+                <p class="text-gray-500 text-sm">🏆 Career growth</p>
+            </div>
+        </div>
+
+        <!-- Additional Trust Badges -->
+        <div class="mt-16 flex flex-wrap justify-center items-center gap-8 animate-on-scroll" style="animation-delay: 0.4s">
+            <div class="glass px-6 py-3 rounded-full flex items-center space-x-2">
+                <i class="fas fa-award text-yellow-500 text-xl"></i>
+                <span class="font-semibold">ISO Certified</span>
+            </div>
+            <div class="glass px-6 py-3 rounded-full flex items-center space-x-2">
+                <i class="fas fa-shield-alt text-green-500 text-xl"></i>
+                <span class="font-semibold">100% Secure</span>
+            </div>
+            <div class="glass px-6 py-3 rounded-full flex items-center space-x-2">
+                <i class="fas fa-headset text-blue-500 text-xl"></i>
+                <span class="font-semibold">24/7 Support</span>
+            </div>
+            <div class="glass px-6 py-3 rounded-full flex items-center space-x-2">
+                <i class="fas fa-certificate text-purple-500 text-xl"></i>
+                <span class="font-semibold">Accredited</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Scrolling Programs Showcase -->
+<section class="py-24 bg-gradient-to-br from-gray-50 via-purple-50 to-indigo-100 overflow-hidden relative">
+    <!-- Decorative Elements -->
+    <div class="absolute top-10 right-10 text-indigo-200 opacity-20">
+        <i class="fas fa-book-open text-9xl"></i>
+    </div>
+    <div class="absolute bottom-10 left-10 text-purple-200 opacity-20">
+        <i class="fas fa-laptop-code text-9xl"></i>
+    </div>
+
+    <div class="container mx-auto px-6 mb-16">
+        <div class="text-center animate-on-scroll">
+            <div class="inline-block mb-4">
+                <span class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-2 rounded-full text-sm font-bold">
+                    🔥 TRENDING NOW
+                </span>
+            </div>
+            <h3 class="text-6xl font-black mb-6">
+                <span class="gradient-text">Explore Our Programs</span> 🚀
+            </h3>
+            <p class="text-2xl text-gray-700 font-semibold mb-4">Discover world-class education opportunities</p>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                From <span class="font-bold text-indigo-600">Harvard</span> to <span class="font-bold text-indigo-600">IIM</span>,
+                choose from programs designed by industry leaders
+            </p>
+        </div>
+    </div>
+
+    <!-- First Row - Scroll Left -->
+    <div class="scroll-container mb-8">
+        <div id="scroll-row-1" class="scroll-content">
+            <!-- Will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Second Row - Scroll Right -->
+    <div class="scroll-container">
+        <div id="scroll-row-2" class="scroll-content-reverse">
+            <!-- Will be populated by JavaScript -->
+        </div>
+    </div>
+</section>
+
+<!-- Partner Universities Showcase -->
+<section class="py-24 bg-white overflow-hidden relative">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-5">
+        <div class="absolute top-0 left-0 w-full h-full" style="background-image: repeating-linear-gradient(45deg, #667eea 0, #667eea 1px, transparent 0, transparent 50%); background-size: 20px 20px;"></div>
+    </div>
+
+    <div class="container mx-auto px-6 mb-16 relative z-10">
+        <div class="text-center animate-on-scroll">
+            <div class="inline-block mb-4">
+                <span class="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-2 rounded-full text-sm font-bold">
+                    ⭐ WORLD-CLASS PARTNERS
+                </span>
+            </div>
+            <h3 class="text-6xl font-black mb-6">
+                <span class="gradient-text">Our Partner Universities</span> 🏛️
+            </h3>
+            <p class="text-2xl text-gray-700 font-semibold mb-4">Collaborating with world's leading institutions</p>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                Learn from the <span class="font-bold text-indigo-600">best universities</span> across the globe.
+                Get internationally recognized degrees that open doors worldwide 🌍
+            </p>
+        </div>
+    </div>
+
+    <!-- Universities Scroll -->
+    <div class="scroll-container white-bg">
+        <div id="universities-scroll" class="scroll-content-slow">
+            <!-- Will be populated by JavaScript -->
+        </div>
+    </div>
+</section>
+
+<!-- Inspirational Quote Carousel -->
+<section class="py-16 bg-gradient-to-r from-indigo-50 to-purple-50">
+    <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <i class="fas fa-quote-left text-indigo-300 text-5xl mb-6"></i>
+            <div id="quote-carousel" class="relative">
+                <div class="quote-slide">
+                    <p class="text-3xl font-light text-gray-800 mb-6 italic">"Education is the most powerful weapon which you can use to change the world."</p>
+                    <p class="text-xl text-indigo-600 font-semibold">- Nelson Mandela</p>
+                </div>
+            </div>
+            <div class="flex justify-center space-x-2 mt-8">
+                <button class="quote-dot w-3 h-3 rounded-full bg-indigo-600" data-index="0"></button>
+                <button class="quote-dot w-3 h-3 rounded-full bg-gray-300" data-index="1"></button>
+                <button class="quote-dot w-3 h-3 rounded-full bg-gray-300" data-index="2"></button>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Special Benefits Section -->
+<section class="py-24 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white relative overflow-hidden">
+    <!-- Animated Background -->
+    <div class="absolute inset-0 opacity-10">
+        <div class="absolute w-96 h-96 bg-white rounded-full -top-48 -left-48 animate-pulse"></div>
+        <div class="absolute w-96 h-96 bg-white rounded-full -bottom-48 -right-48 animate-pulse" style="animation-delay: 1s"></div>
+    </div>
+
+    <div class="container mx-auto px-6 relative z-10">
+        <div class="text-center mb-16 animate-on-scroll">
+            <h3 class="text-6xl font-black mb-6 neon-glow">
+                Why Students Love Us? 💖
+            </h3>
+            <p class="text-2xl font-semibold opacity-90">
+                Everything you need to succeed in one place!
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Benefit 1 -->
+            <div class="glass rounded-3xl p-8 text-center transform hover:scale-105 transition-all duration-300 animate-on-scroll">
+                <div class="text-6xl mb-4">💰</div>
+                <h4 class="text-2xl font-bold mb-3">Easy EMI Options</h4>
+                <p class="text-lg opacity-90">Start learning now, pay later! Flexible payment plans starting at ₹5,000/month</p>
+                <div class="mt-4 inline-block bg-white/20 px-4 py-2 rounded-full text-sm font-semibold">
+                    0% Interest Available
+                </div>
+            </div>
+
+            <!-- Benefit 2 -->
+            <div class="glass rounded-3xl p-8 text-center transform hover:scale-105 transition-all duration-300 animate-on-scroll" style="animation-delay: 0.1s">
+                <div class="text-6xl mb-4">🎯</div>
+                <h4 class="text-2xl font-bold mb-3">100% Placement Support</h4>
+                <p class="text-lg opacity-90">Dedicated career counseling, resume building, and interview preparation</p>
+                <div class="mt-4 inline-block bg-white/20 px-4 py-2 rounded-full text-sm font-semibold">
+                    500+ Hiring Partners
+                </div>
+            </div>
+
+            <!-- Benefit 3 -->
+            <div class="glass rounded-3xl p-8 text-center transform hover:scale-105 transition-all duration-300 animate-on-scroll" style="animation-delay: 0.2s">
+                <div class="text-6xl mb-4">⚡</div>
+                <h4 class="text-2xl font-bold mb-3">Learn at Your Pace</h4>
+                <p class="text-lg opacity-90">Flexible schedules, weekend batches, and lifetime access to course materials</p>
+                <div class="mt-4 inline-block bg-white/20 px-4 py-2 rounded-full text-sm font-semibold">
+                    24/7 Learning Access
+                </div>
+            </div>
+        </div>
+
+        <!-- Limited Time Offer Banner -->
+        <div class="mt-16 text-center animate-on-scroll" style="animation-delay: 0.3s">
+            <div class="inline-block bg-yellow-400 text-gray-900 px-8 py-4 rounded-full font-black text-xl shadow-2xl pulse-glow">
+                🎉 Limited Time: Get 20% OFF on Early Bird Registrations! 🎉
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Program Types Section with Hover Effects -->
+<section id="program-types" class="py-20 bg-white">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-16 animate-on-scroll">
+            <h3 class="text-5xl font-bold mb-4 gradient-text">Browse by Program Type</h3>
+            <p class="text-xl text-gray-600">Choose the learning format that fits your lifestyle</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <a href="/programs?type=online" class="group bg-white rounded-2xl shadow-xl p-8 text-center hover:shadow-2xl transform hover:-translate-y-4 transition-all duration-300 animate-on-scroll border-2 border-transparent hover:border-blue-500">
+                <div class="bg-gradient-to-br from-blue-400 to-blue-600 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform shadow-lg">
+                    <i class="fas fa-laptop text-white text-3xl"></i>
+                </div>
+                <h4 class="text-2xl font-bold mb-3 group-hover:text-blue-600 transition">Online Programs</h4>
+                <p class="text-gray-600 mb-4">Study from anywhere, anytime with flexible online classes</p>
+                <div class="text-blue-600 font-semibold group-hover:translate-x-2 transition-transform inline-flex items-center">
+                    Explore <i class="fas fa-arrow-right ml-2"></i>
+                </div>
+            </a>
+
+            <a href="/programs?type=odl" class="group bg-white rounded-2xl shadow-xl p-8 text-center hover:shadow-2xl transform hover:-translate-y-4 transition-all duration-300 animate-on-scroll border-2 border-transparent hover:border-green-500" style="animation-delay: 0.1s">
+                <div class="bg-gradient-to-br from-green-400 to-green-600 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform shadow-lg">
+                    <i class="fas fa-book-open text-white text-3xl"></i>
+                </div>
+                <h4 class="text-2xl font-bold mb-3 group-hover:text-green-600 transition">ODL Programs</h4>
+                <p class="text-gray-600 mb-4">Open Distance Learning for self-paced education</p>
+                <div class="text-green-600 font-semibold group-hover:translate-x-2 transition-transform inline-flex items-center">
+                    Explore <i class="fas fa-arrow-right ml-2"></i>
+                </div>
+            </a>
+
+            <a href="/programs?type=work-linked" class="group bg-white rounded-2xl shadow-xl p-8 text-center hover:shadow-2xl transform hover:-translate-y-4 transition-all duration-300 animate-on-scroll border-2 border-transparent hover:border-purple-500" style="animation-delay: 0.2s">
+                <div class="bg-gradient-to-br from-purple-400 to-purple-600 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform shadow-lg">
+                    <i class="fas fa-briefcase text-white text-3xl"></i>
+                </div>
+                <h4 class="text-2xl font-bold mb-3 group-hover:text-purple-600 transition">Work-Linked</h4>
+                <p class="text-gray-600 mb-4">Combine work experience with academic learning</p>
+                <div class="text-purple-600 font-semibold group-hover:translate-x-2 transition-transform inline-flex items-center">
+                    Explore <i class="fas fa-arrow-right ml-2"></i>
+                </div>
+            </a>
+
+            <a href="/programs?type=executive" class="group bg-white rounded-2xl shadow-xl p-8 text-center hover:shadow-2xl transform hover:-translate-y-4 transition-all duration-300 animate-on-scroll border-2 border-transparent hover:border-orange-500" style="animation-delay: 0.3s">
+                <div class="bg-gradient-to-br from-orange-400 to-orange-600 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform shadow-lg">
+                    <i class="fas fa-user-tie text-white text-3xl"></i>
+                </div>
+                <h4 class="text-2xl font-bold mb-3 group-hover:text-orange-600 transition">Executive Programs</h4>
+                <p class="text-gray-600 mb-4">For working professionals seeking career advancement</p>
+                <div class="text-orange-600 font-semibold group-hover:translate-x-2 transition-transform inline-flex items-center">
+                    Explore <i class="fas fa-arrow-right ml-2"></i>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+
+<!-- Featured Programs with Images -->
+<section class="py-20 bg-gradient-to-br from-gray-50 to-indigo-50">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-16 animate-on-scroll">
+            <h3 class="text-5xl font-bold mb-4 gradient-text">Featured Programs</h3>
+            <p class="text-xl text-gray-600">Explore our most popular programs</p>
+        </div>
+        <div id="featured-programs" class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <!-- Will be populated by AJAX -->
+        </div>
+        <div class="text-center mt-16 animate-on-scroll">
+            <a href="/programs" class="px-10 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full font-semibold hover:shadow-2xl inline-block transform hover:scale-110 transition text-lg">
+                View All Programs <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Career Quiz Section -->
+<section class="py-24 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 text-white relative overflow-hidden">
+    <!-- Animated Background -->
+    <div class="absolute inset-0 opacity-20">
+        <div class="absolute top-10 left-10 w-72 h-72 bg-white rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
+        <div class="absolute bottom-10 right-10 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl animate-pulse" style="animation-delay: 2s"></div>
+    </div>
+
+    <div class="container mx-auto px-6 relative z-10">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="inline-block mb-6 animate-on-scroll">
+                <span class="bg-white/20 backdrop-blur-lg px-6 py-3 rounded-full text-sm font-semibold inline-flex items-center space-x-2">
+                    <i class="fas fa-lightbulb text-yellow-300"></i>
+                    <span>🎯 Find Your Perfect Match</span>
+                </span>
+            </div>
+
+            <h3 class="text-6xl font-black mb-6 animate-on-scroll leading-tight">
+                Not Sure Which Path to Choose?
+            </h3>
+
+            <p class="text-2xl mb-4 font-semibold animate-on-scroll" style="animation-delay: 0.1s">
+                Take our 2-minute career quiz to discover programs tailored to your goals
+            </p>
+
+            <p class="text-xl mb-12 opacity-90 animate-on-scroll" style="animation-delay: 0.2s">
+                Answer a few simple questions and get personalized program recommendations based on your career stage, goals, and learning preferences
+            </p>
+
+            <!-- Quiz Features -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 animate-on-scroll" style="animation-delay: 0.3s">
+                <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20">
+                    <div class="text-5xl mb-4">⚡</div>
+                    <h4 class="text-xl font-bold mb-2">Quick & Easy</h4>
+                    <p class="text-white/80">Just 5 simple questions, takes only 2 minutes</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20">
+                    <div class="text-5xl mb-4">🎯</div>
+                    <h4 class="text-xl font-bold mb-2">Personalized</h4>
+                    <p class="text-white/80">Get recommendations based on your unique profile</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20">
+                    <div class="text-5xl mb-4">🎓</div>
+                    <h4 class="text-xl font-bold mb-2">Expert Guidance</h4>
+                    <p class="text-white/80">Backed by career counseling expertise</p>
+                </div>
+            </div>
+
+            <!-- CTA Button -->
+            <div class="animate-on-scroll" style="animation-delay: 0.4s">
+                <a href="/career-quiz" class="group inline-flex items-center px-12 py-5 bg-white text-indigo-600 rounded-full font-bold text-xl hover:shadow-2xl transform hover:scale-110 transition-all duration-300 pulse-glow">
+                    <i class="fas fa-play-circle mr-3 text-2xl group-hover:rotate-90 transition-transform"></i>
+                    Start Career Quiz Now
+                    <i class="fas fa-arrow-right ml-3 group-hover:translate-x-2 transition-transform"></i>
+                </a>
+                <p class="text-sm mt-4 opacity-75">✨ No registration required • 100% Free</p>
+            </div>
+
+            <!-- Trust Indicators -->
+            <div class="flex flex-wrap justify-center items-center gap-8 mt-12 text-sm opacity-90 animate-on-scroll" style="animation-delay: 0.5s">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-users text-yellow-300"></i>
+                    <span>10,000+ Students Helped</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-star text-yellow-300"></i>
+                    <span>4.9/5 Rating</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-check-circle text-green-300"></i>
+                    <span>95% Match Accuracy</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Success Stories / Testimonials Carousel -->
+<section id="testimonials" class="py-20 bg-white">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-16 animate-on-scroll">
+            <h3 class="text-5xl font-bold mb-4 gradient-text">Success Stories</h3>
+            <p class="text-xl text-gray-600">Hear from our successful alumni</p>
+        </div>
+
+        <div class="max-w-6xl mx-auto">
+            <div id="testimonial-carousel" class="relative">
+                <div class="testimonial-slide bg-gradient-to-br from-indigo-50 to-purple-50 rounded-3xl p-12 shadow-2xl">
+                    <div class="flex items-center mb-8">
+                        <div class="w-20 h-20 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center text-white text-3xl font-bold mr-6">
+                            R
+                        </div>
+                        <div>
+                            <h4 class="text-2xl font-bold text-gray-800">Rajesh Kumar</h4>
+                            <p class="text-indigo-600 font-semibold">Marketing Executive → Marketing Manager</p>
+                        </div>
+                    </div>
+                    <p class="text-xl text-gray-700 italic leading-relaxed">"This program completely transformed my career! The curriculum was practical and industry-relevant. Within 6 months of completion, I got promoted to a managerial role with a 40% salary hike."</p>
+                    <div class="flex mt-6">
+                        <i class="fas fa-star text-yellow-400 text-xl"></i>
+                        <i class="fas fa-star text-yellow-400 text-xl ml-1"></i>
+                        <i class="fas fa-star text-yellow-400 text-xl ml-1"></i>
+                        <i class="fas fa-star text-yellow-400 text-xl ml-1"></i>
+                        <i class="fas fa-star text-yellow-400 text-xl ml-1"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-center space-x-3 mt-8">
+                <button class="testimonial-dot w-4 h-4 rounded-full bg-indigo-600" data-index="0"></button>
+                <button class="testimonial-dot w-4 h-4 rounded-full bg-gray-300" data-index="1"></button>
+                <button class="testimonial-dot w-4 h-4 rounded-full bg-gray-300" data-index="2"></button>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Why Choose Us with Icons -->
+<section class="py-20 bg-gradient-to-br from-indigo-600 to-purple-600 text-white">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-16 animate-on-scroll">
+            <h3 class="text-5xl font-bold mb-4">Why Choose Digivarsity?</h3>
+            <p class="text-xl opacity-90">Your success is our mission</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div class="text-center animate-on-scroll">
+                <div class="bg-white bg-opacity-20 backdrop-blur-lg w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 shadow-2xl">
+                    <i class="fas fa-certificate text-white text-4xl"></i>
+                </div>
+                <h4 class="text-2xl font-bold mb-4">Accredited Programs</h4>
+                <p class="text-lg opacity-90">All programs from top-ranked universities worldwide</p>
+            </div>
+            <div class="text-center animate-on-scroll" style="animation-delay: 0.1s">
+                <div class="bg-white bg-opacity-20 backdrop-blur-lg w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 shadow-2xl">
+                    <i class="fas fa-chalkboard-teacher text-white text-4xl"></i>
+                </div>
+                <h4 class="text-2xl font-bold mb-4">Expert Faculty</h4>
+                <p class="text-lg opacity-90">Learn from industry leaders and experienced professors</p>
+            </div>
+            <div class="text-center animate-on-scroll" style="animation-delay: 0.2s">
+                <div class="bg-white bg-opacity-20 backdrop-blur-lg w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 shadow-2xl">
+                    <i class="fas fa-chart-line text-white text-4xl"></i>
+                </div>
+                <h4 class="text-2xl font-bold mb-4">Career Growth</h4>
+                <p class="text-lg opacity-90">95% of our students report career advancement within 1 year</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-20 bg-white">
+    <div class="container mx-auto px-6">
+        <div class="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-3xl p-16 text-center text-white shadow-2xl animate-on-scroll">
+            <h3 class="text-5xl font-bold mb-6">Ready to Transform Your Career?</h3>
+            <p class="text-2xl mb-10 opacity-90">Join thousands of successful professionals today</p>
+            <div class="flex justify-center space-x-4">
+                <a href="/programs" class="px-10 py-4 bg-white text-indigo-600 rounded-full font-bold hover:bg-gray-100 inline-block shadow-xl transform hover:scale-110 transition text-lg">
+                    <i class="fas fa-rocket mr-2"></i>Get Started Now
+                </a>
+                <a href="#" class="px-10 py-4 bg-transparent border-2 border-white text-white rounded-full font-bold hover:bg-white hover:text-indigo-600 inline-block transform hover:scale-110 transition text-lg">
+                    <i class="fas fa-phone mr-2"></i>Talk to Counselor
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="py-24 bg-white">
+    <div class="container mx-auto px-4 sm:px-6">
+        <div class="text-center mb-16 animate-on-scroll">
+            <h3 class="text-6xl font-black mb-6">
+                <span class="gradient-text">Get In Touch</span> 📞
+            </h3>
+            <p class="text-2xl text-gray-700 font-semibold mb-4">Have questions? We're here to help!</p>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                Reach out to our team for any inquiries about programs, admissions, or career guidance
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <!-- Email -->
+            <div class="text-center p-8 bg-gradient-to-br from-indigo-50 to-purple-50 rounded-3xl hover:shadow-xl transition-all transform hover:-translate-y-2 animate-on-scroll">
+                <div class="bg-gradient-to-br from-indigo-600 to-purple-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                    <i class="fas fa-envelope text-white text-3xl"></i>
+                </div>
+                <h4 class="text-xl font-bold text-gray-800 mb-3">Email Us</h4>
+                <a href="mailto:info@digivarsity.com" class="text-indigo-600 font-semibold hover:underline">
+                    info@digivarsity.com
+                </a>
+                <p class="text-gray-600 text-sm mt-2">We'll respond within 24 hours</p>
+            </div>
+
+            <!-- Phone -->
+            <div class="text-center p-8 bg-gradient-to-br from-green-50 to-teal-50 rounded-3xl hover:shadow-xl transition-all transform hover:-translate-y-2 animate-on-scroll" style="animation-delay: 0.1s">
+                <div class="bg-gradient-to-br from-green-600 to-teal-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                    <i class="fas fa-phone-alt text-white text-3xl"></i>
+                </div>
+                <h4 class="text-xl font-bold text-gray-800 mb-3">Call Us</h4>
+                <a href="tel:+911234567890" class="text-green-600 font-semibold hover:underline">
+                    +91 1234567890
+                </a>
+                <p class="text-gray-600 text-sm mt-2">Mon-Sat, 9 AM - 6 PM</p>
+            </div>
+
+            <!-- Location -->
+            <div class="text-center p-8 bg-gradient-to-br from-orange-50 to-red-50 rounded-3xl hover:shadow-xl transition-all transform hover:-translate-y-2 animate-on-scroll" style="animation-delay: 0.2s">
+                <div class="bg-gradient-to-br from-orange-600 to-red-600 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                    <i class="fas fa-map-marker-alt text-white text-3xl"></i>
+                </div>
+                <h4 class="text-xl font-bold text-gray-800 mb-3">Visit Us</h4>
+                <p class="text-gray-700 font-semibold">
+                    Mumbai, India
+                </p>
+                <p class="text-gray-600 text-sm mt-2">Corporate Office</p>
+            </div>
+        </div>
+
+        <!-- Quick Contact Form -->
+        <div class="mt-16 max-w-2xl mx-auto animate-on-scroll" style="animation-delay: 0.3s">
+            <div class="bg-gradient-to-br from-indigo-600 to-purple-600 rounded-3xl p-8 text-white text-center shadow-2xl">
+                <h4 class="text-3xl font-bold mb-4">Ready to Start Your Journey? 🚀</h4>
+                <p class="text-lg mb-6 opacity-90">Book a free counseling session with our experts</p>
+                <a href="/programs" class="inline-block px-10 py-4 bg-white text-indigo-600 rounded-full font-bold hover:shadow-xl transform hover:scale-105 transition-all">
+                    <i class="fas fa-calendar-check mr-2"></i>Book Free Session
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gradient-to-br from-gray-900 via-indigo-900 to-purple-900 text-white py-16">
+    <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            <!-- Brand -->
+            <div>
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="bg-white p-2 rounded-xl">
+                        <i class="fas fa-graduation-cap text-indigo-600 text-2xl"></i>
+                    </div>
+                    <h4 class="text-2xl font-black">Digivarsity</h4>
+                </div>
+                <p class="text-gray-300 leading-relaxed mb-4">
+                    Transform your future with world-class education from top universities.
+                </p>
+                <div class="flex space-x-3">
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h4 class="text-xl font-bold mb-6">Quick Links</h4>
+                <ul class="space-y-3">
+                    <li><a href="/" class="text-gray-300 hover:text-white transition flex items-center"><i class="fas fa-chevron-right text-indigo-400 mr-2 text-sm"></i>Home</a></li>
+                    <li><a href="/programs" class="text-gray-300 hover:text-white transition flex items-center"><i class="fas fa-chevron-right text-indigo-400 mr-2 text-sm"></i>Programs</a></li>
+                    <li><a href="#universities-scroll" class="text-gray-300 hover:text-white transition flex items-center"><i class="fas fa-chevron-right text-indigo-400 mr-2 text-sm"></i>Universities</a></li>
+                    <li><a href="#testimonials" class="text-gray-300 hover:text-white transition flex items-center"><i class="fas fa-chevron-right text-indigo-400 mr-2 text-sm"></i>Success Stories</a></li>
+                    <li><a href="#contact" class="text-gray-300 hover:text-white transition flex items-center"><i class="fas fa-chevron-right text-indigo-400 mr-2 text-sm"></i>Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-xl font-semibold mb-6">Program Types</h4>
+                <ul class="space-y-3">
+                    <li><a href="/programs?type=online" class="text-gray-400 hover:text-white transition flex items-center"><i class="fas fa-laptop text-blue-400 mr-2"></i>Online</a></li>
+                    <li><a href="/programs?type=odl" class="text-gray-400 hover:text-white transition flex items-center"><i class="fas fa-book-open text-green-400 mr-2"></i>ODL</a></li>
+                    <li><a href="/programs?type=work-linked" class="text-gray-400 hover:text-white transition flex items-center"><i class="fas fa-briefcase text-purple-400 mr-2"></i>Work-Linked</a></li>
+                    <li><a href="/programs?type=executive" class="text-gray-400 hover:text-white transition flex items-center"><i class="fas fa-user-tie text-orange-400 mr-2"></i>Executive</a></li>
+                </ul>
+            </div>
+            <!-- Contact -->
+            <div>
+                <h4 class="text-xl font-bold mb-6">Contact Us</h4>
+                <ul class="space-y-4 text-gray-300">
+                    <li class="flex items-start"><i class="fas fa-envelope text-indigo-400 mr-3 mt-1"></i>info@digivarsity.com</li>
+                    <li class="flex items-start"><i class="fas fa-phone text-indigo-400 mr-3 mt-1"></i>+91 1234567890</li>
+                    <li class="flex items-start"><i class="fas fa-map-marker-alt text-indigo-400 mr-3 mt-1"></i>Mumbai, India</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="border-t border-gray-700 pt-8 text-center">
+            <p class="text-gray-400">&copy; 2024 Digivarsity. All rights reserved. | Built with <i class="fas fa-heart text-red-500"></i> for Education</p>
+        </div>
+    </div>
+</footer>
+@endsection
+
+
+@push('scripts')
+<script>
+    // Quotes for carousel
+    const quotes = [
+        {
+            text: "Education is the most powerful weapon which you can use to change the world.",
+            author: "Nelson Mandela"
+        },
+        {
+            text: "The beautiful thing about learning is that no one can take it away from you.",
+            author: "B.B. King"
+        },
+        {
+            text: "An investment in knowledge pays the best interest.",
+            author: "Benjamin Franklin"
+        }
+    ];
+
+    // Testimonials for carousel
+    const testimonials = [
+        {
+            name: "Rajesh Kumar",
+            role: "Marketing Executive → Marketing Manager",
+            initial: "R",
+            text: "This program completely transformed my career! The curriculum was practical and industry-relevant. Within 6 months of completion, I got promoted to a managerial role with a 40% salary hike.",
+            color: "from-indigo-500 to-purple-600"
+        },
+        {
+            name: "Priya Sharma",
+            role: "Software Developer → Data Scientist",
+            initial: "P",
+            text: "The faculty and course content were exceptional. I successfully transitioned from development to data science. The hands-on projects gave me real-world experience.",
+            color: "from-green-500 to-teal-600"
+        },
+        {
+            name: "Amit Patel",
+            role: "Sales Manager → Business Development Head",
+            initial: "A",
+            text: "Best decision of my career! The program helped me develop strategic thinking and leadership skills. I'm now heading the BD department at a Fortune 500 company.",
+            color: "from-orange-500 to-red-600"
+        }
+    ];
+
+    let currentQuoteIndex = 0;
+    let currentTestimonialIndex = 0;
+
+    // Hero Background Rotation
+    @if($heroBackgrounds && $heroBackgrounds->count() > 1)
+    let currentBackgroundIndex = 0;
+    const heroBackgrounds = document.querySelectorAll('.hero-background');
+    const totalBackgrounds = heroBackgrounds.length;
+
+    function rotateHeroBackground() {
+        // Fade out current background
+        heroBackgrounds[currentBackgroundIndex].style.opacity = '0';
+
+        // Move to next background
+        currentBackgroundIndex = (currentBackgroundIndex + 1) % totalBackgrounds;
+
+        // Fade in next background
+        heroBackgrounds[currentBackgroundIndex].style.opacity = '1';
+    }
+
+    // Rotate backgrounds every 5 seconds
+    if (totalBackgrounds > 1) {
+        setInterval(rotateHeroBackground, 5000);
+    }
+    @endif
+
+    // Scroll Animation Observer
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    // Counter Animation
+    function animateCounter(element) {
+        const target = parseInt(element.getAttribute('data-target'));
+        const duration = 2000;
+        const step = target / (duration / 16);
+        let current = 0;
+
+        const timer = setInterval(() => {
+            current += step;
+            if (current >= target) {
+                element.textContent = target;
+                clearInterval(timer);
+            } else {
+                element.textContent = Math.floor(current);
+            }
+        }, 16);
+    }
+
+    // Quote Carousel
+    function rotateQuote() {
+        currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
+        const quote = quotes[currentQuoteIndex];
+
+        const carousel = document.getElementById('quote-carousel');
+        carousel.style.opacity = '0';
+
+        setTimeout(() => {
+            carousel.innerHTML = `
+                <div class="quote-slide">
+                    <p class="text-3xl font-light text-gray-800 mb-6 italic">"${quote.text}"</p>
+                    <p class="text-xl text-indigo-600 font-semibold">- ${quote.author}</p>
+                </div>
+            `;
+            carousel.style.opacity = '1';
+        }, 300);
+
+        // Update dots
+        document.querySelectorAll('.quote-dot').forEach((dot, index) => {
+            dot.classList.toggle('bg-indigo-600', index === currentQuoteIndex);
+            dot.classList.toggle('bg-gray-300', index !== currentQuoteIndex);
+        });
+    }
+
+    // Testimonial Carousel
+    function rotateTestimonial() {
+        currentTestimonialIndex = (currentTestimonialIndex + 1) % testimonials.length;
+        const testimonial = testimonials[currentTestimonialIndex];
+
+        const carousel = document.getElementById('testimonial-carousel');
+        carousel.style.opacity = '0';
+
+        setTimeout(() => {
+            carousel.innerHTML = `
+                <div class="testimonial-slide bg-gradient-to-br from-indigo-50 to-purple-50 rounded-3xl p-12 shadow-2xl">
+                    <div class="flex items-center mb-8">
+                        <div class="w-20 h-20 bg-gradient-to-br ${testimonial.color} rounded-full flex items-center justify-center text-white text-3xl font-bold mr-6 shadow-lg">
+                            ${testimonial.initial}
+                        </div>
+                        <div>
+                            <h4 class="text-2xl font-bold text-gray-800">${testimonial.name}</h4>
+                            <p class="text-indigo-600 font-semibold">${testimonial.role}</p>
+                        </div>
+                    </div>
+                    <p class="text-xl text-gray-700 italic leading-relaxed">"${testimonial.text}"</p>
+                    <div class="flex mt-6">
+                        <i class="fas fa-star text-yellow-400 text-xl"></i>
+                        <i class="fas fa-star text-yellow-400 text-xl ml-1"></i>
+                        <i class="fas fa-star text-yellow-400 text-xl ml-1"></i>
+                        <i class="fas fa-star text-yellow-400 text-xl ml-1"></i>
+                        <i class="fas fa-star text-yellow-400 text-xl ml-1"></i>
+                    </div>
+                </div>
+            `;
+            carousel.style.opacity = '1';
+        }, 300);
+
+        // Update dots
+        document.querySelectorAll('.testimonial-dot').forEach((dot, index) => {
+            dot.classList.toggle('bg-indigo-600', index === currentTestimonialIndex);
+            dot.classList.toggle('bg-gray-300', index !== currentTestimonialIndex);
+        });
+    }
+
+    // Load Scrolling Programs Showcase
+    async function loadScrollingPrograms() {
+        try {
+            const response = await apiRequest('/programs?per_page=20', 'GET', null, false);
+            const programs = response.data.data || [];
+
+            if (programs.length === 0) return;
+
+            // Duplicate programs for infinite scroll effect
+            const duplicatedPrograms = [...programs, ...programs];
+
+            // First row (scroll left)
+            const row1 = document.getElementById('scroll-row-1');
+            row1.innerHTML = duplicatedPrograms.map(program => `
+                <div class="scroll-item">
+                    <a href="/programs/${program.id}" class="block">
+                        <div class="w-80 h-48 rounded-2xl overflow-hidden shadow-2xl relative group">
+                            ${program.image_url ?
+                                `<img src="${program.image_url}" alt="${program.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">` :
+                                `<div class="w-full h-full bg-gradient-to-br from-indigo-400 to-purple-600 flex items-center justify-center">
+                                    <i class="fas fa-graduation-cap text-white text-6xl opacity-50"></i>
+                                </div>`
+                            }
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
+                                    <h4 class="font-bold text-lg mb-1">${program.name}</h4>
+                                    <p class="text-sm opacity-90">${program.university ? program.university.name : ''}</p>
+                                </div>
+                            </div>
+                            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
+                                <span class="text-indigo-600 font-semibold text-sm capitalize">${program.type}</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            `).join('');
+
+            // Second row (scroll right) - different programs
+            const row2Programs = [...programs.slice(5), ...programs.slice(0, 5), ...programs.slice(5), ...programs.slice(0, 5)];
+            const row2 = document.getElementById('scroll-row-2');
+            row2.innerHTML = row2Programs.map(program => `
+                <div class="scroll-item">
+                    <a href="/programs/${program.id}" class="block">
+                        <div class="w-80 h-48 rounded-2xl overflow-hidden shadow-2xl relative group">
+                            ${program.image_url ?
+                                `<img src="${program.image_url}" alt="${program.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">` :
+                                `<div class="w-full h-full bg-gradient-to-br from-purple-400 to-pink-600 flex items-center justify-center">
+                                    <i class="fas fa-graduation-cap text-white text-6xl opacity-50"></i>
+                                </div>`
+                            }
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
+                                    <h4 class="font-bold text-lg mb-1">${program.name}</h4>
+                                    <p class="text-sm opacity-90">${program.university ? program.university.name : ''}</p>
+                                </div>
+                            </div>
+                            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
+                                <span class="text-purple-600 font-semibold text-sm capitalize">${program.type}</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            `).join('');
+        } catch (error) {
+            console.error('Error loading scrolling programs:', error);
+        }
+    }
+
+    // Load Universities Carousel
+    async function loadUniversitiesCarousel() {
+        try {
+            const response = await apiRequest('/universities', 'GET', null, false);
+            const universities = response.data || [];
+
+            if (universities.length === 0) return;
+
+            // Duplicate for infinite scroll
+            const duplicatedUniversities = [...universities, ...universities, ...universities];
+
+            const container = document.getElementById('universities-scroll');
+            container.innerHTML = duplicatedUniversities.map(university => `
+                <div class="scroll-item">
+                    <div class="w-64 h-40 bg-white rounded-2xl shadow-xl p-6 flex flex-col items-center justify-center hover:shadow-2xl transition-shadow duration-300 border-2 border-gray-100">
+                        ${university.logo ?
+                            `<img src="${university.logo}" alt="${university.name}" class="h-16 mb-3 object-contain">` :
+                            `<div class="w-16 h-16 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-full flex items-center justify-center mb-3">
+                                <i class="fas fa-university text-indigo-600 text-2xl"></i>
+                            </div>`
+                        }
+                        <h4 class="font-bold text-gray-800 text-center text-sm">${university.name}</h4>
+                        <p class="text-xs text-gray-500 text-center mt-1">${university.location || ''}</p>
+                    </div>
+                </div>
+            `).join('');
+        } catch (error) {
+            console.error('Error loading universities:', error);
+        }
+    }
+
+    // Load Featured Programs
+    async function loadFeaturedPrograms() {
+        try {
+            const response = await apiRequest('/programs?limit=6', 'GET', null, false);
+            const programs = response.data.data || [];
+
+            const container = document.getElementById('featured-programs');
+            if (programs.length === 0) {
+                container.innerHTML = '<p class="text-center text-gray-500 col-span-3">No programs available</p>';
+                return;
+            }
+
+            container.innerHTML = programs.slice(0, 3).map((program, index) => `
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 animate-on-scroll" style="animation-delay: ${index * 0.1}s">
+                    <div class="h-56 bg-gradient-to-br from-indigo-400 to-purple-600 relative overflow-hidden">
+                        ${program.image_url ?
+                            `<img src="${program.image_url}" alt="${program.name}" class="w-full h-full object-cover">` :
+                            `<div class="w-full h-full flex items-center justify-center">
+                                <i class="fas fa-graduation-cap text-white text-6xl opacity-50"></i>
+                            </div>`
+                        }
+                        <div class="absolute top-4 right-4 bg-white px-4 py-2 rounded-full shadow-lg">
+                            <span class="text-indigo-600 font-bold capitalize">${program.type || 'Online'}</span>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h4 class="text-2xl font-bold mb-3 text-gray-800 hover:text-indigo-600 transition">${program.name}</h4>
+                        <p class="text-gray-600 mb-4 line-clamp-2">${program.description || 'Comprehensive program designed for career growth'}</p>
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="flex items-center text-gray-600">
+                                <i class="fas fa-clock mr-2 text-indigo-600"></i>
+                                <span>${program.duration || '12 months'}</span>
+                            </div>
+                            <div class="flex items-center text-gray-600">
+                                <i class="fas fa-rupee-sign mr-2 text-green-600"></i>
+                                <span class="font-bold">${formatCurrency(program.fees)}</span>
+                            </div>
+                        </div>
+                        <a href="/programs/${program.id}" class="block w-full text-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full font-semibold hover:shadow-lg transform hover:scale-105 transition">
+                            View Details <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            `).join('');
+
+            // Re-observe new elements
+            document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+        } catch (error) {
+            console.error('Error loading programs:', error);
+            document.getElementById('featured-programs').innerHTML =
+                '<p class="text-center text-red-500 col-span-3">Failed to load programs</p>';
+        }
+    }
+
+    // Toggle Mobile Menu
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        if (menu.style.display === 'none' || menu.style.display === '') {
+            menu.style.display = 'block';
+            menu.classList.add('active');
+        } else {
+            menu.style.display = 'none';
+            menu.classList.remove('active');
+        }
+    }
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        // Observe all animate-on-scroll elements
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Animate counters when visible
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter(entry.target);
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.counter').forEach(counter => {
+            counterObserver.observe(counter);
+        });
+
+        // Load all carousels and featured programs
+        loadScrollingPrograms();
+        loadUniversitiesCarousel();
+        loadFeaturedPrograms();
+
+        // Start carousels
+        setInterval(rotateQuote, 5000);
+        setInterval(rotateTestimonial, 7000);
+
+        // Quote dots click handlers
+        document.querySelectorAll('.quote-dot').forEach(dot => {
+            dot.addEventListener('click', function() {
+                currentQuoteIndex = parseInt(this.getAttribute('data-index'));
+                rotateQuote();
+            });
+        });
+
+        // Testimonial dots click handlers
+        document.querySelectorAll('.testimonial-dot').forEach(dot => {
+            dot.addEventListener('click', function() {
+                currentTestimonialIndex = parseInt(this.getAttribute('data-index'));
+                rotateTestimonial();
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    });
+</script>
+@endpush
+
+

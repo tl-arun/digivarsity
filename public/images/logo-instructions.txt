@@ -1,0 +1,24 @@
+LOGO SETUP INSTRUCTIONS
+=======================
+
+Your new Digivarsity logo has been created with the black, blue, and white theme.
+
+The logo file is located at: public/images/digivarsity-logo.svg
+
+To use your custom logo image from the picture you provided:
+1. Save your logo image as "digivarsity-logo.png"
+2. Place it in the public/images/ folder
+3. The navbar is already configured to use it
+
+The logo should have:
+- The colorful petal icon (red, green, blue) with ® symbol on the right
+- "Digivarsity" text in white
+- Transparent or black background
+- Recommended size: 1024x400px or similar aspect ratio
+
+Current Theme Colors:
+- Primary: Black (#000000)
+- Secondary: Blue (#2196F3)
+- Accent: White (#FFFFFF)
+- Light Blue: #64B5F6
+- Dark Blue: #0D47A1

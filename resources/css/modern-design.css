@@ -1,0 +1,337 @@
+/* Modern Minimalist Design System - Integrated Biosciences Style for Students */
+
+/* Import Inter font - professional, clean, modern */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+    /* Base Colors - Clean, White, Neutral */
+    --color-base: #FFFFFF;
+    --color-surface: #FAFAFA;
+    --color-text-primary: #171717;
+    --color-text-secondary: #525252;
+    --color-text-tertiary: #A3A3A3;
+
+    /* Accent Colors - Soft but Lively */
+    --color-accent-teal: #14B8A6;
+    --color-accent-cyan: #06B6D4;
+    --color-accent-purple: #C084FC;
+    --color-accent-lime: #84CC16;
+
+    /* Spacing System */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --spacing-2xl: 4rem;
+    --spacing-3xl: 6rem;
+
+    /* Typography Scale */
+    --text-xs: 0.75rem;
+    --text-sm: 0.875rem;
+    --text-base: 1rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.25rem;
+    --text-2xl: 1.5rem;
+    --text-3xl: 1.875rem;
+    --text-4xl: 2.25rem;
+    --text-5xl: 3rem;
+    --text-6xl: 3.75rem;
+
+    /* Shadows - Subtle, Professional */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+
+    /* Border Radius */
+    --radius-sm: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+    --radius-2xl: 1.5rem;
+
+    /* Transitions */
+    --transition-fast: 150ms ease;
+    --transition-base: 250ms ease;
+    --transition-slow: 350ms ease;
+}
+
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: var(--text-base);
+    line-height: 1.6;
+    color: var(--color-text-primary);
+    background-color: var(--color-base);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography Hierarchy */
+.heading-hero {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--color-text-primary);
+}
+
+.heading-1 {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--color-text-primary);
+}
+
+.heading-2 {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--color-text-primary);
+}
+
+.heading-3 {
+    font-size: clamp(1.25rem, 2.5vw, 2rem);
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--color-text-primary);
+}
+
+.body-large {
+    font-size: var(--text-lg);
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+}
+
+.body-base {
+    font-size: var(--text-base);
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+}
+
+.body-small {
+    font-size: var(--text-sm);
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--color-text-tertiary);
+}
+
+/* Layout Components */
+.container-clean {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+}
+
+.section-spacing {
+    padding: var(--spacing-3xl) 0;
+}
+
+.grid-clean {
+    display: grid;
+    gap: var(--spacing-lg);
+}
+
+/* Card Components - Flat, Minimal */
+.card-minimal {
+    background: var(--color-base);
+    border: 1px solid #E5E5E5;
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    transition: all var(--transition-base);
+}
+
+.card-minimal:hover {
+    border-color: var(--color-accent-teal);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+/* Button Components - Clean, Solid */
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: 0.875rem 1.75rem;
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: white;
+    background: var(--color-text-primary);
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.btn-primary:hover {
+    background: var(--color-text-secondary);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: 0.875rem 1.75rem;
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--color-text-primary);
+    background: transparent;
+    border: 1.5px solid var(--color-text-primary);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.btn-secondary:hover {
+    background: var(--color-text-primary);
+    color: white;
+}
+
+.btn-accent {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: 0.875rem 1.75rem;
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: white;
+    background: var(--color-accent-teal);
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.btn-accent:hover {
+    background: #0D9488;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Accent Highlights - Subtle */
+.accent-teal {
+    color: var(--color-accent-teal);
+}
+
+.accent-cyan {
+    color: var(--color-accent-cyan);
+}
+
+.accent-purple {
+    color: var(--color-accent-purple);
+}
+
+.accent-lime {
+    color: var(--color-accent-lime);
+}
+
+/* Dividers - Thin, Subtle */
+.divider-clean {
+    height: 1px;
+    background: #E5E5E5;
+    border: none;
+    margin: var(--spacing-xl) 0;
+}
+
+/* Icons - Minimal, Consistent */
+.icon-minimal {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: var(--color-text-secondary);
+}
+
+/* Animations - Smooth, Understated */
+.fade-in {
+    animation: fadeIn 0.6s ease-out;
+}
+
+.slide-up {
+    animation: slideUp 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hover Effects - Subtle Lift */
+.hover-lift {
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Abstract Illustrations - Placeholder Styles */
+.illustration-abstract {
+    width: 100%;
+    height: auto;
+    opacity: 0.9;
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+    :root {
+        --spacing-xl: 2rem;
+        --spacing-2xl: 3rem;
+        --spacing-3xl: 4rem;
+    }
+
+    .heading-hero {
+        font-size: 2.5rem;
+    }
+
+    .heading-1 {
+        font-size: 2rem;
+    }
+}
+
+/* White Space Management */
+.space-y-xs > * + * {
+    margin-top: var(--spacing-xs);
+}
+
+.space-y-sm > * + * {
+    margin-top: var(--spacing-sm);
+}
+
+.space-y-md > * + * {
+    margin-top: var(--spacing-md);
+}
+
+.space-y-lg > * + * {
+    margin-top: var(--spacing-lg);
+}
+
+.space-y-xl > * + * {
+    margin-top: var(--spacing-xl);
+}

@@ -1,0 +1,19 @@
+{
+  "message": "Is MBA good?",
+  "programs": [
+    {
+      "id": 1,
+      "name": "MBA in Business Management",
+      "description": "Master of Business Administration",
+      "university": "Test University",
+      "duration": "2 years",
+      "mode": "Online",
+      "fees": 200000,
+      "eligibility": "Bachelor's degree",
+      "intent": "Career Growth",
+      "outcome": "Professional Development",
+      "is_featured": true
+    }
+  ],
+  "context": {}
+}

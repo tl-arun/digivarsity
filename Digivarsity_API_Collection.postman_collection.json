@@ -1,0 +1,727 @@
+{
+  "info": {
+    "name": "Digivarsity Unified Education Platform API",
+    "description": "Complete API collection for Digivarsity platform with authentication, RBAC, and all modules",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{auth_token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000/api/v1",
+      "type": "string"
+    },
+    {
+      "key": "auth_token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.collectionVariables.set('auth_token', jsonData.data.token);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"admin@digivarsity.com\",\n    \"password\": \"password\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Get Current User",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/auth/me",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "me"]
+            }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/auth/logout",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "logout"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Programs",
+      "item": [
+        {
+          "name": "Get All Programs",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/programs?type=online&per_page=10",
+              "host": ["{{base_url}}"],
+              "path": ["programs"],
+              "query": [
+                {
+                  "key": "type",
+                  "value": "online"
+                },
+                {
+                  "key": "per_page",
+                  "value": "10"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Program by ID",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/programs/1",
+              "host": ["{{base_url}}"],
+              "path": ["programs", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Intents",
+      "item": [
+        {
+          "name": "Get All Intents",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/intents",
+              "host": ["{{base_url}}"],
+              "path": ["intents"]
+            }
+          }
+        },
+        {
+          "name": "Get Programs by Intent",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/intents/1/programs",
+              "host": ["{{base_url}}"],
+              "path": ["intents", "1", "programs"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Outcomes",
+      "item": [
+        {
+          "name": "Get All Outcomes",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/outcomes",
+              "host": ["{{base_url}}"],
+              "path": ["outcomes"]
+            }
+          }
+        },
+        {
+          "name": "Get Programs by Outcome",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/outcomes/1/programs",
+              "host": ["{{base_url}}"],
+              "path": ["outcomes", "1", "programs"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Universities",
+      "item": [
+        {
+          "name": "Get All Universities",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/universities",
+              "host": ["{{base_url}}"],
+              "path": ["universities"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Testimonials",
+      "item": [
+        {
+          "name": "Get Testimonials by Program",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/programs/1/testimonials",
+              "host": ["{{base_url}}"],
+              "path": ["programs", "1", "testimonials"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Leads",
+      "item": [
+        {
+          "name": "Submit Lead",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\",\n    \"phone\": \"1234567890\",\n    \"program_id\": 1,\n    \"intent_id\": 1,\n    \"outcome_id\": 1,\n    \"source\": \"website\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/leads",
+              "host": ["{{base_url}}"],
+              "path": ["leads"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin - Dashboard",
+      "item": [
+        {
+          "name": "Get Dashboard Stats",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/admin/dashboard",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "dashboard"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin - Programs",
+      "item": [
+        {
+          "name": "Create Program",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"MBA in Digital Marketing\",\n    \"type\": \"online\",\n    \"description\": \"Comprehensive MBA program\",\n    \"curriculum\": \"Marketing, Analytics, Strategy\",\n    \"duration\": \"2 years\",\n    \"mode\": \"Online\",\n    \"fees\": 150000,\n    \"eligibility\": \"Bachelor's degree\",\n    \"university_id\": 1,\n    \"is_active\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/admin/programs",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "programs"]
+            }
+          }
+        },
+        {
+          "name": "Update Program",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"MBA in Digital Marketing - Updated\",\n    \"fees\": 160000\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/admin/programs/1",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "programs", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Program",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/admin/programs/1",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "programs", "1"]
+            }
+          }
+        },
+        {
+          "name": "Map Intents to Program",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"intent_ids\": [1, 2, 3]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/admin/programs/1/map-intents",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "programs", "1", "map-intents"]
+            }
+          }
+        },
+        {
+          "name": "Map Outcomes to Program",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"outcome_ids\": [1, 2]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/admin/programs/1/map-outcomes",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "programs", "1", "map-outcomes"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin - Intents",
+      "item": [
+        {
+          "name": "Create Intent",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Career Advancement\",\n    \"description\": \"Advance your career to next level\",\n    \"is_active\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/admin/intents",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "intents"]
+            }
+          }
+        },
+        {
+          "name": "Update Intent",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"description\": \"Updated description\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/admin/intents/1",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "intents", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Intent",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/admin/intents/1",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "intents", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin - Outcomes",
+      "item": [
+        {
+          "name": "Create Outcome",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Leadership Role\",\n    \"description\": \"Transition to leadership positions\",\n    \"is_active\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/admin/outcomes",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "outcomes"]
+            }
+          }
+        },
+        {
+          "name": "Update Outcome",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"description\": \"Updated description\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/admin/outcomes/1",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "outcomes", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Outcome",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/admin/outcomes/1",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "outcomes", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin - Universities",
+      "item": [
+        {
+          "name": "Create University",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Harvard University\",\n    \"description\": \"Premier institution\",\n    \"location\": \"Cambridge, MA\",\n    \"website\": \"https://harvard.edu\",\n    \"is_active\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/admin/universities",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "universities"]
+            }
+          }
+        },
+        {
+          "name": "Update University",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"description\": \"Updated description\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/admin/universities/1",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "universities", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete University",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/admin/universities/1",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "universities", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin - Testimonials",
+      "item": [
+        {
+          "name": "Create Testimonial",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"program_id\": 1,\n    \"student_name\": \"Jane Smith\",\n    \"before_role\": \"Marketing Executive\",\n    \"after_role\": \"Marketing Director\",\n    \"message\": \"This program transformed my career!\",\n    \"is_active\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/admin/testimonials",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "testimonials"]
+            }
+          }
+        },
+        {
+          "name": "Update Testimonial",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"message\": \"Updated testimonial message\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/admin/testimonials/1",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "testimonials", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Testimonial",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/admin/testimonials/1",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "testimonials", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin - Leads",
+      "item": [
+        {
+          "name": "Get All Leads",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/admin/leads?status=new&per_page=20",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "leads"],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "new"
+                },
+                {
+                  "key": "per_page",
+                  "value": "20"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin - Users",
+      "item": [
+        {
+          "name": "Create User",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"New User\",\n    \"email\": \"newuser@example.com\",\n    \"password\": \"password123\",\n    \"phone\": \"9876543210\",\n    \"is_active\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/admin/users",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "users"]
+            }
+          }
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Updated Name\",\n    \"phone\": \"1111111111\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/admin/users/1",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "users", "1"]
+            }
+          }
+        },
+        {
+          "name": "Assign Role to User",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"role_id\": 2\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/admin/users/1/assign-role",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "users", "1", "assign-role"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

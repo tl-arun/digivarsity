@@ -1,0 +1,70 @@
+server {
+    listen 80;
+    listen [::]:80;
+
+    # Define the root directory and index file
+    root /var/www/html/public;
+    index index.php index.html;
+
+    # Primary location block
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+
+    # PHP handling via FastCGI
+    location ~ \.php$ {
+        include fastcgi_params;
+        fastcgi_pass 127.0.0.1:9000;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param PATH_INFO $fastcgi_path_info;
+
+        # Max Timeouts for PHP-FPM
+        fastcgi_connect_timeout 6000s;
+        fastcgi_send_timeout 6000s;
+        fastcgi_read_timeout 6000s;
+
+        # Buffer size for large files
+        fastcgi_buffers 64 64k;
+        fastcgi_buffer_size 128k;
+    }
+    # Increase upload and POST size
+    client_max_body_size 10G; # 10GB
+    client_body_buffer_size 256M; # Prevent memory issues
+
+    # Increase proxy timeouts
+    proxy_read_timeout 6000;
+    proxy_connect_timeout 6000;
+    proxy_send_timeout 6000;
+    send_timeout 6000;
+
+    proxy_buffer_size 128k;
+    proxy_buffers 4 256k;
+    proxy_busy_buffers_size 256k;
+
+    # Logging Configuration
+    error_log /dev/stderr warn;
+    access_log /dev/stdout;
+
+    # Block hidden files
+    location ~ /\.(?!well-known).* {
+        deny all;
+    }
+
+    # Security Headers
+    add_header X-Frame-Options "SAMEORIGIN";
+    add_header X-Content-Type-Options "nosniff";
+    add_header X-XSS-Protection "1; mode=block";
+
+    # Restrict HTTP Methods
+    if ($request_method !~ ^(GET|POST|HEAD)$) {
+        return 444;
+    }
+
+    # Custom Error Page
+    error_page 404 /404.html;
+
+    error_log /var/log/nginx/error.log info;   # Capture Nginx errors at 'info' level
+    access_log /var/log/nginx/access.log;      # Define path for Nginx access logs
+}

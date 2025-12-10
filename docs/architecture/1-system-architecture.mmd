@@ -1,0 +1,76 @@
+graph TB
+    subgraph "Client Layer"
+        Browser[Web Browser]
+        Admin[Admin Dashboard]
+        Public[Public Pages]
+    end
+
+    subgraph "Docker Container - app"
+        Nginx[Nginx :80]
+        PHPFPM[PHP-FPM :9000]
+        
+        subgraph "Laravel Application"
+            Router[Router]
+            Middleware[Middleware<br/>Auth, RBAC, CORS]
+            
+            subgraph "Controllers"
+                WebCtrl[Web Controllers]
+                APICtrl[API Controllers v1]
+            end
+            
+            subgraph "Models"
+                User[User]
+                Program[Program]
+                Intent[Intent]
+                Outcome[Outcome]
+                University[University]
+                Lead[Lead]
+                Resume[ResumeAnalysis]
+            end
+            
+            Scheduler[Laravel Scheduler]
+        end
+    end
+
+    subgraph "Data Layer"
+        MySQL[(XAMPP MySQL<br/>:3307)]
+        Redis[(Redis<br/>:6379)]
+    end
+
+    Browser --> Nginx
+    Admin --> Nginx
+    Public --> Nginx
+    
+    Nginx --> PHPFPM
+    PHPFPM --> Router
+    Router --> Middleware
+    Middleware --> WebCtrl
+    Middleware --> APICtrl
+    
+    WebCtrl --> User
+    WebCtrl --> Program
+    APICtrl --> User
+    APICtrl --> Program
+    APICtrl --> Intent
+    APICtrl --> Outcome
+    APICtrl --> University
+    APICtrl --> Lead
+    APICtrl --> Resume
+    
+    User --> MySQL
+    Program --> MySQL
+    Intent --> MySQL
+    Outcome --> MySQL
+    University --> MySQL
+    Lead --> MySQL
+    Resume --> MySQL
+    
+    Middleware --> Redis
+    Scheduler --> Redis
+    
+    style Browser fill:#e1f5ff
+    style Admin fill:#fff4e1
+    style Nginx fill:#90EE90
+    style PHPFPM fill:#FFB6C1
+    style MySQL fill:#FFD700
+    style Redis fill:#FF6347
