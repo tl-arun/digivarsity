@@ -617,19 +617,17 @@
                         ${program.duration ? `
                             <div class="flex items-center text-gray-600 text-sm">
                                 <i class="fas fa-clock mr-2 text-green-600 w-4"></i>
-                                <span>${program.duration}</span>
-                            </div>
-                        ` : ''}
-                        ${program.mode ? `
-                            <div class="flex items-center text-gray-600 text-sm">
+                                <span>${program.duration}</span> 
+                                <div class="flex items-center text-gray-600 text-sm" style="margin-left:5%">
                                 <i class="fas fa-laptop mr-2 text-purple-600 w-4"></i>
                                 <span>${program.mode}</span>
+                                </div>
                             </div>
                         ` : ''}
                     </div>
 
                     <!-- Description -->
-                    <p class="text-gray-600 text-sm mb-4 line-clamp-2 leading-relaxed flex-1">${program.description || 'Comprehensive program designed for career growth'}</p>
+                    <!-- <p class="text-gray-600 text-sm mb-4 line-clamp-2 leading-relaxed flex-1">${program.description || 'Comprehensive program designed for career growth'}</p> -->
 
                     <!-- Footer -->
                     <div class="border-t-2 border-gray-100 pt-4 flex justify-between items-center mt-auto">
