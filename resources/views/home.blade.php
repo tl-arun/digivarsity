@@ -197,35 +197,35 @@
 @include('components.intent-selector')
 
 <!-- Hero Section -->
-<section class="hero-modern text-white py-24 lg:py-32 relative">
-    <div class="container mx-auto px-6 lg:px-8 relative z-10">
+<section class="hero-modern text-white py-12 sm:py-16 md:py-20 lg:py-32 relative">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="max-w-5xl mx-auto text-center">
             <!-- Badge -->
-            <div class="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md px-6 py-3 rounded-full mb-8 animate-on-scroll">
+            <div class="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md px-4 sm:px-6 py-2 sm:py-3 rounded-full mb-6 sm:mb-8 animate-on-scroll">
                 <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-                <span class="text-sm font-semibold">Trusted by 10,000+ Students</span>
+                <span class="text-xs sm:text-sm font-semibold">Trusted by 10,000+ Students</span>
             </div>
 
             <!-- Heading -->
-            <h1 class="text-5xl lg:text-7xl font-black mb-6 leading-tight animate-on-scroll" style="animation-delay: 0.1s">
-                Transform Your Career<br/>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black mb-4 sm:mb-6 leading-tight animate-on-scroll" style="animation-delay: 0.1s">
+                Transform Your Career<br class="hidden sm:block"/>
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-blue-400 to-blue-500">
                     With World-Class Education
                 </span>
             </h1>
 
             <!-- Subheading -->
-            <p class="text-xl lg:text-2xl text-gray-200 mb-12 max-w-3xl mx-auto animate-on-scroll" style="animation-delay: 0.2s">
+            <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 mb-8 sm:mb-12 max-w-3xl mx-auto animate-on-scroll px-4" style="animation-delay: 0.2s">
                 Access premium online programs from top universities. Learn at your pace, advance your career, achieve your dreams.
             </p>
 
             <!-- CTA Buttons -->
-            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mb-16 animate-on-scroll" style="animation-delay: 0.3s">
-                <button onclick="openQuizModal()" class="modern-btn bg-white text-blue-700 px-10 py-4 text-lg font-semibold shadow-xl hover:shadow-2xl">
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 mb-12 sm:mb-16 animate-on-scroll px-4" style="animation-delay: 0.3s">
+                <button onclick="openQuizModal()" class="w-full sm:w-auto modern-btn bg-white text-blue-700 px-6 sm:px-10 py-3 sm:py-4 text-base sm:text-lg font-semibold shadow-xl hover:shadow-2xl">
                     <i class="fas fa-magic"></i>
                     <span>Find Your Program</span>
                 </button>
-                <button onclick="openResumeModal()" class="modern-btn bg-blue-600 hover:bg-blue-700 text-white border-2 border-blue-500 px-10 py-4 text-lg font-semibold">
+                <button onclick="openResumeModal()" class="w-full sm:w-auto modern-btn bg-blue-600 hover:bg-blue-700 text-white border-2 border-blue-500 px-6 sm:px-10 py-3 sm:py-4 text-base sm:text-lg font-semibold">
                     <i class="fas fa-file-upload"></i>
                     <span>Upload Resume</span>
                 </button>
@@ -256,9 +256,9 @@
 </section>
 
 <!-- Stats Section -->
-<section class="py-20 bg-white">
-    <div class="container mx-auto px-6 lg:px-8">
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+<section class="py-12 sm:py-16 md:py-20 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
             <!-- Stat 1 -->
             <div class="text-center animate-on-scroll">
                 <div class="feature-icon mx-auto mb-4">
@@ -311,167 +311,26 @@
 </section>
 
 <!-- Features Section -->
-<section class="py-24 bg-gray-50">
-    <div class="container mx-auto px-6 lg:px-8">
-        <!-- Section Header -->
-        <div class="text-center mb-16 animate-on-scroll">
-            <h2 class="text-4xl lg:text-5xl font-black mb-4">
-                Why Choose <span class="gradient-text">Digivarsity</span>
-            </h2>
-            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-                Experience education that adapts to your lifestyle and accelerates your career growth
-            </p>
-        </div>
-
-        <!-- Features Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Feature 1 -->
-            <div class="modern-card animate-on-scroll">
-                <div class="feature-icon mb-6">
-                    <i class="fas fa-laptop-code text-white text-2xl"></i>
-                </div>
-                <h3 class="text-2xl font-bold mb-3 text-gray-900">Flexible Learning</h3>
-                <p class="text-gray-600 leading-relaxed">
-                    Study at your own pace with 24/7 access to course materials. Balance work, life, and education seamlessly.
-                </p>
-            </div>
-
-            <!-- Feature 2 -->
-            <div class="modern-card animate-on-scroll" style="animation-delay: 0.1s">
-                <div class="feature-icon mb-6">
-                    <i class="fas fa-certificate text-white text-2xl"></i>
-                </div>
-                <h3 class="text-2xl font-bold mb-3 text-gray-900">Industry Recognition</h3>
-                <p class="text-gray-600 leading-relaxed">
-                    Earn certificates from top universities that are valued by employers worldwide.
-                </p>
-            </div>
-
-            <!-- Feature 3 -->
-            <div class="modern-card animate-on-scroll" style="animation-delay: 0.2s">
-                <div class="feature-icon mb-6">
-                    <i class="fas fa-users-cog text-white text-2xl"></i>
-                </div>
-                <h3 class="text-2xl font-bold mb-3 text-gray-900">Expert Mentorship</h3>
-                <p class="text-gray-600 leading-relaxed">
-                    Learn from industry experts and get personalized guidance throughout your journey.
-                </p>
-            </div>
-
-            <!-- Feature 4 -->
-            <div class="modern-card animate-on-scroll" style="animation-delay: 0.3s">
-                <div class="feature-icon mb-6">
-                    <i class="fas fa-briefcase text-white text-2xl"></i>
-                </div>
-                <h3 class="text-2xl font-bold mb-3 text-gray-900">Career Support</h3>
-                <p class="text-gray-600 leading-relaxed">
-                    Get 100% placement assistance with resume building, interview prep, and job connections.
-                </p>
-            </div>
-
-            <!-- Feature 5 -->
-            <div class="modern-card animate-on-scroll" style="animation-delay: 0.4s">
-                <div class="feature-icon mb-6">
-                    <i class="fas fa-project-diagram text-white text-2xl"></i>
-                </div>
-                <h3 class="text-2xl font-bold mb-3 text-gray-900">Real Projects</h3>
-                <p class="text-gray-600 leading-relaxed">
-                    Work on industry-relevant projects and build a portfolio that showcases your skills.
-                </p>
-            </div>
-
-            <!-- Feature 6 -->
-            <div class="modern-card animate-on-scroll" style="animation-delay: 0.5s">
-                <div class="feature-icon mb-6">
-                    <i class="fas fa-hand-holding-usd text-white text-2xl"></i>
-                </div>
-                <h3 class="text-2xl font-bold mb-3 text-gray-900">Affordable EMI</h3>
-                <p class="text-gray-600 leading-relaxed">
-                    Flexible payment options with easy EMI plans. Invest in your future without financial stress.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
 
 <!-- Career Journey Section (Intents → Programs → Outcomes) -->
-<section class="py-24 bg-white">
-    <div class="container mx-auto px-6 lg:px-8">
-        <!-- Section Header -->
-        <div class="text-center mb-16 animate-on-scroll">
-            <h3 class="text-4xl lg:text-5xl font-black mb-4">
-                <span class="gradient-text">Your Career Journey</span>
-            </h3>
-            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                Choose your goal, find the right program, and achieve your dream career
-            </p>
-        </div>
 
-        <!-- Journey Flow -->
-        <div class="max-w-6xl mx-auto mb-16">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Step 1: Intent -->
-                <div class="text-center animate-on-scroll">
-                    <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
-                        <i class="fas fa-bullseye text-white text-3xl"></i>
-                    </div>
-                    <h4 class="text-2xl font-bold mb-2 text-gray-900">1. Your Goal</h4>
-                    <p class="text-gray-600">What do you want to achieve?</p>
-                </div>
-
-                <!-- Arrow -->
-                <div class="hidden md:flex items-center justify-center">
-                    <i class="fas fa-arrow-right text-4xl text-blue-300"></i>
-                </div>
-
-                <!-- Step 2: Program -->
-                <div class="text-center animate-on-scroll" style="animation-delay: 0.1s">
-                    <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
-                        <i class="fas fa-graduation-cap text-white text-3xl"></i>
-                    </div>
-                    <h4 class="text-2xl font-bold mb-2 text-gray-900">2. Right Program</h4>
-                    <p class="text-gray-600">Learn the skills you need</p>
-                </div>
-
-                <!-- Arrow -->
-                <div class="hidden md:flex items-center justify-center">
-                    <i class="fas fa-arrow-right text-4xl text-blue-300"></i>
-                </div>
-
-                <!-- Step 3: Outcome -->
-                <div class="text-center animate-on-scroll" style="animation-delay: 0.2s">
-                    <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
-                        <i class="fas fa-trophy text-white text-3xl"></i>
-                    </div>
-                    <h4 class="text-2xl font-bold mb-2 text-gray-900">3. Dream Career</h4>
-                    <p class="text-gray-600">Achieve your goals</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Popular Career Paths -->
-        <div id="career-paths" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Will be populated by JavaScript -->
-        </div>
-    </div>
-</section>
 
 <!-- Featured Programs Section -->
-<section class="py-24 bg-gradient-to-br from-gray-50 to-blue-50">
-    <div class="container mx-auto px-6">
-        <div class="text-center mb-16 animate-on-scroll">
-            <h3 class="text-4xl lg:text-5xl font-black mb-4">
+<section class="py-12 sm:py-16 md:py-20 lg:py-24 bg-gradient-to-br from-gray-50 to-blue-50">
+    <div class="container mx-auto px-4 sm:px-6">
+        <div class="text-center mb-12 sm:mb-16 animate-on-scroll">
+            <h3 class="text-3xl sm:text-4xl lg:text-5xl font-black mb-4">
                 <span class="gradient-text">Featured Programs</span>
             </h3>
-            <p class="text-xl text-gray-600">Explore our most popular programs</p>
+            <p class="text-lg sm:text-xl text-gray-600 px-4">Explore our most popular programs</p>
         </div>
 
-        <div id="featured-programs" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div id="featured-programs" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             <!-- Programs will be loaded here -->
         </div>
 
-        <div class="text-center mt-12">
-            <a href="/programs" class="modern-btn bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 text-lg font-semibold">
+        <div class="text-center mt-8 sm:mt-12">
+            <a href="/programs" class="modern-btn bg-blue-600 hover:bg-blue-700 text-white px-8 sm:px-10 py-3 sm:py-4 text-base sm:text-lg font-semibold">
                 <span>View All Programs</span>
                 <i class="fas fa-arrow-right"></i>
             </a>
@@ -480,199 +339,44 @@
 </section>
 
 <!-- Partner Universities Section -->
-<section class="py-24 bg-white overflow-hidden relative" id="universities">
-    <div class="container mx-auto px-6 mb-16 relative z-10">
-        <div class="text-center animate-on-scroll">
+<section class="py-12 sm:py-16 md:py-20 lg:py-24 bg-white overflow-hidden relative" id="universities">
+    <!-- Header Section - Centered -->
+    <div class="w-full px-4 sm:px-6 mb-12 sm:mb-16 relative z-10">
+        <div class="text-center animate-on-scroll max-w-6xl mx-auto">
             <div class="inline-block mb-4">
-                <span class="bg-blue-600 text-white px-6 py-3 rounded-full text-sm font-bold">
+                <span class="bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full text-xs sm:text-sm font-bold">
                     ⭐ WORLD-CLASS PARTNERS
                 </span>
             </div>
-            <h3 class="text-4xl lg:text-5xl font-black mb-6">
+            <h3 class="text-3xl sm:text-4xl lg:text-5xl font-black mb-4 sm:mb-6">
                 <span class="gradient-text">Our Partner Universities</span>
             </h3>
-            <p class="text-xl text-gray-700 font-semibold mb-4">Collaborating with world's leading institutions</p>
-            <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+            <p class="text-lg sm:text-xl text-gray-700 font-semibold mb-3 sm:mb-4">Collaborating with world's leading institutions</p>
+            <p class="text-base sm:text-lg text-gray-600 max-w-4xl mx-auto">
                 Learn from the <span class="font-bold text-blue-600">best universities</span> across the globe.
                 Get internationally recognized degrees that open doors worldwide.
             </p>
         </div>
     </div>
 
-    <!-- Universities Scroll -->
-    <div class="relative overflow-hidden py-8">
-        <div id="universities-scroll" class="flex space-x-6 animate-scroll">
+    <!-- Universities Scroll - Full Width -->
+    <div class="w-full overflow-hidden py-6 sm:py-8">
+        <div id="universities-scroll" class="flex space-x-4 sm:space-x-6 md:space-x-8 animate-scroll pl-4 sm:pl-6">
             <!-- Will be populated by JavaScript -->
         </div>
     </div>
 </section>
 
 <!-- Success Stories / Testimonials Section -->
-<section id="testimonials" class="py-24 bg-gray-50">
-    <div class="container mx-auto px-6">
-        <div class="text-center mb-16 animate-on-scroll">
-            <h3 class="text-4xl lg:text-5xl font-black mb-4">
-                <span class="gradient-text">Success Stories</span>
-            </h3>
-            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-                Hear from students who transformed their careers with us
-            </p>
-        </div>
-
-        <!-- Testimonial Carousel -->
-        <div class="max-w-4xl mx-auto">
-            <div id="testimonial-carousel" class="modern-card text-center p-12 relative">
-                <i class="fas fa-quote-left text-blue-200 text-5xl mb-6"></i>
-                <p class="text-2xl text-gray-700 mb-8 italic leading-relaxed"></p>
-                <div class="flex items-center justify-center space-x-4">
-                    <img src="" alt="" class="w-16 h-16 rounded-full object-cover">
-                    <div class="text-left">
-                        <p class="font-bold text-lg text-gray-900"></p>
-                        <p class="text-gray-600"></p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Carousel Dots -->
-            <div class="flex justify-center space-x-3 mt-8">
-                <button class="testimonial-dot w-3 h-3 rounded-full bg-blue-600" data-index="0"></button>
-                <button class="testimonial-dot w-3 h-3 rounded-full bg-gray-300" data-index="1"></button>
-                <button class="testimonial-dot w-3 h-3 rounded-full bg-gray-300" data-index="2"></button>
-                <button class="testimonial-dot w-3 h-3 rounded-full bg-gray-300" data-index="3"></button>
-            </div>
-        </div>
-    </div>
-</section>
 
 <!-- AI Resume Analyzer CTA Section -->
-<section class="py-24 bg-gradient-to-br from-black via-blue-900 to-blue-700 relative overflow-hidden">
-    <!-- Animated Background -->
-    <div class="absolute inset-0 opacity-10">
-        <div class="absolute w-96 h-96 bg-white rounded-full top-10 left-10 animate-pulse"></div>
-        <div class="absolute w-96 h-96 bg-white rounded-full bottom-10 right-10 animate-pulse" style="animation-delay: 1s"></div>
-    </div>
-
-    <div class="container mx-auto px-6 lg:px-8 relative z-10">
-        <div class="max-w-5xl mx-auto">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <!-- Left Content -->
-                <div class="text-white">
-                    <div class="inline-block bg-white/20 px-4 py-2 rounded-full text-sm font-bold mb-6">
-                        🤖 AI-POWERED MATCHING
-                    </div>
-                    <h3 class="text-4xl lg:text-5xl font-black mb-6 leading-tight">
-                        Upload Your Resume,<br/>
-                        <span class="text-yellow-300">Find Your Perfect Program!</span>
-                    </h3>
-                    <p class="text-xl mb-8 opacity-90">
-                        Our AI analyzes your skills, experience, and qualifications to recommend the best programs tailored just for you.
-                    </p>
-
-                    <!-- Features List -->
-                    <div class="space-y-4 mb-8">
-                        <div class="flex items-start space-x-3">
-                            <div class="bg-white/20 rounded-full p-2 mt-1">
-                                <i class="fas fa-check text-white"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-lg">Instant Analysis</h4>
-                                <p class="opacity-90">Get results in seconds with our advanced AI</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-3">
-                            <div class="bg-white/20 rounded-full p-2 mt-1">
-                                <i class="fas fa-check text-white"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-lg">Smart Matching</h4>
-                                <p class="opacity-90">Programs matched to your skills and goals</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-3">
-                            <div class="bg-white/20 rounded-full p-2 mt-1">
-                                <i class="fas fa-check text-white"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-lg">100% Free</h4>
-                                <p class="opacity-90">No cost, no commitment required</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button onclick="openResumeModal()" class="modern-btn bg-white text-blue-700 px-10 py-5 text-xl font-bold shadow-2xl">
-                        <i class="fas fa-file-upload"></i>
-                        <span>Upload Resume Now</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
-
-                <!-- Right Visual -->
-                <div class="relative">
-                    <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border-2 border-white/20">
-                        <div class="space-y-4">
-                            <!-- Step 1 -->
-                            <div class="bg-white rounded-2xl p-6 transform hover:scale-105 transition-all">
-                                <div class="flex items-center space-x-4">
-                                    <div class="bg-gradient-to-br from-blue-500 to-blue-700 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl">
-                                        1
-                                    </div>
-                                    <div class="flex-1">
-                                        <h5 class="font-bold text-gray-800">Upload Resume</h5>
-                                        <p class="text-sm text-gray-600">PDF, DOC, or DOCX format</p>
-                                    </div>
-                                    <i class="fas fa-upload text-blue-600 text-2xl"></i>
-                                </div>
-                            </div>
-
-                            <!-- Step 2 -->
-                            <div class="bg-white rounded-2xl p-6 transform hover:scale-105 transition-all">
-                                <div class="flex items-center space-x-4">
-                                    <div class="bg-gradient-to-br from-blue-600 to-blue-800 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl">
-                                        2
-                                    </div>
-                                    <div class="flex-1">
-                                        <h5 class="font-bold text-gray-800">AI Analysis</h5>
-                                        <p class="text-sm text-gray-600">Extract skills & keywords</p>
-                                    </div>
-                                    <i class="fas fa-brain text-blue-600 text-2xl"></i>
-                                </div>
-                            </div>
-
-                            <!-- Step 3 -->
-                            <div class="bg-white rounded-2xl p-6 transform hover:scale-105 transition-all">
-                                <div class="flex items-center space-x-4">
-                                    <div class="bg-gradient-to-br from-blue-700 to-blue-900 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl">
-                                        3
-                                    </div>
-                                    <div class="flex-1">
-                                        <h5 class="font-bold text-gray-800">Get Matches</h5>
-                                        <p class="text-sm text-gray-600">Personalized recommendations</p>
-                                    </div>
-                                    <i class="fas fa-star text-blue-500 text-2xl"></i>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Trust Badge -->
-                        <div class="mt-6 text-center">
-                            <div class="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-white text-sm">
-                                <i class="fas fa-shield-alt text-green-300"></i>
-                                <span>Your data is 100% secure & confidential</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
 <!-- Footer -->
 @include('components.footer')
 
 @push('scripts')
 <script>
-    // Scroll Animation Observer
+    // Enhanced Scroll Animation Observer with Staggered Effects
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -682,11 +386,19 @@
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
+
+                // Add staggered animation for grid children
+                const gridChildren = entry.target.querySelectorAll('.grid > *');
+                gridChildren.forEach((child, index) => {
+                    setTimeout(() => {
+                        child.classList.add('visible');
+                    }, index * 150);
+                });
             }
         });
     }, observerOptions);
 
-    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+    document.querySelectorAll('.animate-on-scroll, .animate-fade-left, .animate-fade-right, .animate-scale-in').forEach(el => {
         observer.observe(el);
     });
 
@@ -739,37 +451,33 @@
 
     // Load Universities Carousel
     async function loadUniversitiesCarousel() {
+        console.log('Loading universities carousel...');
+
+        // Always show fallback universities with logos for now to ensure they display
+        const fallbackUniversities = [
+            { name: 'Oxford University', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Oxford-University-Circlet.svg/200px-Oxford-University-Circlet.svg.png' },
+            { name: 'Harvard University', logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/2/29/Harvard_shield_wreath.svg/200px-Harvard_shield_wreath.svg.png' },
+            { name: 'Stanford University', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Seal_of_Leland_Stanford_Junior_University.svg/200px-Seal_of_Leland_Stanford_Junior_University.svg.png' },
+            { name: 'MIT', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/MIT_logo.svg/200px-MIT_logo.svg.png' },
+            { name: 'Cambridge University', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Coat_of_Arms_of_the_University_of_Cambridge.svg/200px-Coat_of_Arms_of_the_University_of_Cambridge.svg.png' },
+            { name: 'IIT Delhi', logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/f/fd/Indian_Institute_of_Technology_Delhi_Logo.svg/200px-Indian_Institute_of_Technology_Delhi_Logo.svg.png' },
+            { name: 'IIM Ahmedabad', logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/f/f5/Indian_Institute_of_Management_Ahmedabad_Logo.svg/200px-Indian_Institute_of_Management_Ahmedabad_Logo.svg.png' },
+            { name: 'University of Delhi', logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/4/4b/University_of_Delhi.svg/200px-University_of_Delhi.svg.png' }
+        ];
+
+        displayUniversities(fallbackUniversities);
+
+        // Try to load from API in background
         try {
             const response = await apiRequest('/universities', 'GET', null, false);
-            // Handle paginated or direct response
             const universities = response.data?.data || response.data || [];
 
-            if (universities.length === 0) {
-                // Fallback universities if API fails - using Wikipedia logos
-                const fallbackUniversities = [
-                    { name: 'Oxford University', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Oxford-University-Circlet.svg/200px-Oxford-University-Circlet.svg.png' },
-                    { name: 'Harvard University', logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/2/29/Harvard_shield_wreath.svg/200px-Harvard_shield_wreath.svg.png' },
-                    { name: 'Stanford University', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Seal_of_Leland_Stanford_Junior_University.svg/200px-Seal_of_Leland_Stanford_Junior_University.svg.png' },
-                    { name: 'MIT', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/MIT_logo.svg/200px-MIT_logo.svg.png' },
-                    { name: 'Cambridge University', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Coat_of_Arms_of_the_University_of_Cambridge.svg/200px-Coat_of_Arms_of_the_University_of_Cambridge.svg.png' },
-                    { name: 'IIT Delhi', logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/f/fd/Indian_Institute_of_Technology_Delhi_Logo.svg/200px-Indian_Institute_of_Technology_Delhi_Logo.svg.png' },
-                    { name: 'IIM Ahmedabad', logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/f/f5/Indian_Institute_of_Management_Ahmedabad_Logo.svg/200px-Indian_Institute_of_Management_Ahmedabad_Logo.svg.png' },
-                    { name: 'University of Delhi', logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/4/4b/University_of_Delhi.svg/200px-University_of_Delhi.svg.png' }
-                ];
-                displayUniversities(fallbackUniversities);
-            } else {
+            if (universities.length > 0) {
+                console.log('Loaded universities from API:', universities.length);
                 displayUniversities(universities);
             }
         } catch (error) {
-            console.error('Error loading universities:', error);
-            // Show fallback universities with Wikipedia logos
-            const fallbackUniversities = [
-                { name: 'Oxford University', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Oxford-University-Circlet.svg/200px-Oxford-University-Circlet.svg.png' },
-                { name: 'Harvard University', logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/2/29/Harvard_shield_wreath.svg/200px-Harvard_shield_wreath.svg.png' },
-                { name: 'Stanford University', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Seal_of_Leland_Stanford_Junior_University.svg/200px-Seal_of_Leland_Stanford_Junior_University.svg.png' },
-                { name: 'MIT', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/MIT_logo.svg/200px-MIT_logo.svg.png' }
-            ];
-            displayUniversities(fallbackUniversities);
+            console.log('Using fallback universities due to API error:', error);
         }
     }
 
@@ -799,14 +507,14 @@
             }
 
             return `
-                <div class="flex-shrink-0 w-64 h-40 bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center hover:shadow-xl transition-all duration-300 border border-gray-100">
-                    ${hasLogo ?
-                        `<img src="${logoSrc}" alt="${university.name}" class="h-16 w-auto object-contain mb-3" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">` :
-                        ''}
-                    <div class="${hasLogo ? 'hidden' : 'flex'} w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full items-center justify-center mb-3">
-                        <i class="fas fa-university text-white text-2xl"></i>
+                <div class="flex-shrink-0 w-48 sm:w-52 md:w-56 lg:w-64 h-32 sm:h-36 md:h-40 bg-white rounded-xl sm:rounded-2xl shadow-lg p-3 sm:p-4 md:p-6 flex flex-col items-center justify-center hover:shadow-xl transition-all duration-300 border border-gray-100">
+                    <img src="${logoSrc}" alt="${university.name}" class="h-8 sm:h-10 md:h-12 lg:h-16 w-auto object-contain mb-2 sm:mb-3"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                         onload="this.nextElementSibling.style.display='none';">
+                    <div class="w-8 sm:w-10 md:w-12 lg:w-16 h-8 sm:h-10 md:h-12 lg:h-16 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full items-center justify-center mb-2 sm:mb-3" style="display: none;">
+                        <i class="fas fa-university text-white text-sm sm:text-lg md:text-xl lg:text-2xl"></i>
                     </div>
-                    <p class="text-center font-bold text-gray-800 text-sm">${university.name}</p>
+                    <p class="text-center font-bold text-gray-800 text-xs sm:text-sm md:text-sm leading-tight px-1">${university.name}</p>
                 </div>
             `;
         }).join('');
@@ -904,63 +612,100 @@
     // Load Featured Programs
     async function loadFeaturedPrograms() {
         try {
+            console.log('Loading featured programs...');
             const response = await apiRequest('/programs?is_featured=1&limit=6', 'GET', null, false);
+            console.log('API Response:', response);
+
             // Handle paginated response
             const programs = response.data?.data || response.data || [];
+            console.log('Programs found:', programs.length);
 
             if (programs.length === 0) {
-                // Fallback programs
+                console.log('No featured programs found, using fallback programs');
+                // Fallback programs with proper IDs
                 const fallbackPrograms = [
                     {
-                        name: 'MBA',
+                        id: 1,
+                        name: 'MBA in Digital Marketing',
                         university_name: 'Top University',
                         duration: '2 Years',
                         mode: 'Online',
-                        fee: '₹2,50,000',
-                        image_url: '/images/programs/mba.jpg'
+                        fees: '250000',
+                        image_url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop&q=80'
                     },
                     {
-                        name: 'MCA',
+                        id: 2,
+                        name: 'Master of Computer Applications',
                         university_name: 'Leading Institute',
                         duration: '2 Years',
                         mode: 'Online',
-                        fee: '₹1,80,000',
-                        image_url: '/images/programs/mca.jpg'
+                        fees: '180000',
+                        image_url: 'https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=800&h=600&fit=crop&q=80'
                     },
                     {
-                        name: 'BBA',
+                        id: 3,
+                        name: 'Bachelor of Business Administration',
                         university_name: 'Premier University',
                         duration: '3 Years',
                         mode: 'Online',
-                        fee: '₹1,50,000',
-                        image_url: '/images/programs/bba.jpg'
+                        fees: '150000',
+                        image_url: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&h=600&fit=crop&q=80'
                     }
                 ];
                 displayPrograms(fallbackPrograms);
             } else {
+                console.log('Displaying API programs');
                 displayPrograms(programs);
             }
         } catch (error) {
             console.error('Error loading programs:', error);
+            // Show fallback programs on error
+            const fallbackPrograms = [
+                {
+                    id: 1,
+                    name: 'MBA in Digital Marketing',
+                    university_name: 'Top University',
+                    duration: '2 Years',
+                    mode: 'Online',
+                    fees: '250000',
+                    image_url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop&q=80'
+                }
+            ];
+            displayPrograms(fallbackPrograms);
         }
     }
 
     function displayPrograms(programs) {
         const container = document.getElementById('featured-programs');
 
+        if (!programs || programs.length === 0) {
+            container.innerHTML = `
+                <div class="col-span-full text-center py-8">
+                    <p class="text-gray-600">No programs available at the moment.</p>
+                </div>
+            `;
+            return;
+        }
+
         container.innerHTML = programs.map(program => {
+            // Debug: Log program data to console
+            console.log('Program data:', program);
+
             const university = program.university || {};
             const fees = program.fees ? `₹${parseFloat(program.fees).toLocaleString('en-IN')}` : 'Contact Us';
+            const programId = program.id || 1; // Fallback to 1 if no ID
+            const imageUrl = program.image_url || 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&h=600&fit=crop&q=80';
 
             return `
             <div class="modern-card group cursor-pointer">
                 <div class="relative overflow-hidden rounded-xl mb-4 h-48 bg-gradient-to-br from-blue-500 to-blue-700">
-                    ${program.image_url ?
-                        `<img src="${program.image_url}" alt="${program.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" onerror="this.style.display='none'">` :
-                        ''}
+                    <img src="${imageUrl}" alt="${program.name || 'Program'}"
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&h=600&fit=crop&q=80';"
+                         loading="lazy">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                     <div class="absolute bottom-4 left-4 right-4">
-                        <h4 class="text-white font-bold text-xl">${program.name}</h4>
+                        <h4 class="text-white font-bold text-xl">${program.name || 'Program'}</h4>
                     </div>
                 </div>
                 <div class="space-y-3">
@@ -980,7 +725,7 @@
                     </div>
                     <div class="flex items-center justify-between pt-3 border-t border-gray-200">
                         <span class="text-2xl font-bold gradient-text">${fees}</span>
-                        <a href="/programs/${program.id}" class="px-4 py-2 bg-blue-600 text-white rounded-full text-sm font-semibold hover:bg-blue-700 transition-colors">
+                        <a href="/programs/${programId}" class="px-4 py-2 bg-blue-600 text-white rounded-full text-sm font-semibold hover:bg-blue-700 transition-colors">
                             View Details
                         </a>
                     </div>
