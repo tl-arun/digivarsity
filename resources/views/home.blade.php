@@ -52,7 +52,103 @@
     .modern-card:hover {
         transform: translateY(-8px);
         box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        border-color: rgba(99, 102, 241, 0.2);
+        border-color: rgba(33, 150, 243, 0.3);
+    }
+
+    /* Program Card Specific Styles */
+    .program-card {
+        background: white;
+        border-radius: 1rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        min-height: 500px;
+    }
+
+    .program-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.06);
+        border-color: rgba(33, 150, 243, 0.3);
+    }
+
+    /* Line clamp utilities */
+    .line-clamp-1 {
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .line-clamp-3 {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    /* Responsive grid improvements */
+    @media (max-width: 640px) {
+        .program-card {
+            min-height: 450px;
+            border-radius: 0.75rem;
+        }
+        
+        #featured-programs {
+            gap: 1rem !important;
+        }
+    }
+
+    @media (min-width: 641px) and (max-width: 1024px) {
+        .program-card {
+            min-height: 480px;
+        }
+        
+        #featured-programs {
+            gap: 1.5rem !important;
+        }
+    }
+
+    @media (min-width: 1025px) {
+        .program-card {
+            min-height: 520px;
+        }
+        
+        #featured-programs {
+            gap: 2rem !important;
+        }
+    }
+
+    /* Enhanced button styling */
+    .program-card a[href*="/programs/"] {
+        background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+        box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.3);
+        border: none;
+        font-weight: 600;
+        letter-spacing: 0.025em;
+    }
+
+    .program-card a[href*="/programs/"]:hover {
+        background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+        box-shadow: 0 8px 25px 0 rgba(37, 99, 235, 0.4);
+        transform: translateY(-2px) scale(1.02);
+    }
+
+    /* Ensure equal height cards */
+    #featured-programs {
+        align-items: stretch;
+    }
+
+    .program-card {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
     }
 
     /* Gradient Text - Blue Theme */
@@ -325,7 +421,7 @@
             <p class="text-lg sm:text-xl text-gray-600 px-4">Explore our most popular programs</p>
         </div>
 
-        <div id="featured-programs" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div id="featured-programs" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 items-stretch">
             <!-- Programs will be loaded here -->
         </div>
 
@@ -697,36 +793,72 @@
             const imageUrl = program.image_url || 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&h=600&fit=crop&q=80';
 
             return `
-            <div class="modern-card group cursor-pointer">
-                <div class="relative overflow-hidden rounded-xl mb-4 h-48 bg-gradient-to-br from-blue-500 to-blue-700">
+            <div class="program-card group cursor-pointer overflow-hidden h-full flex flex-col">
+                <!-- Program Image -->
+                <div class="h-48 sm:h-52 md:h-56 lg:h-60 bg-gradient-to-br from-blue-500 to-blue-700 relative overflow-hidden flex-shrink-0">
                     <img src="${imageUrl}" alt="${program.name || 'Program'}"
-                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&h=600&fit=crop&q=80';"
+                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                         onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='flex';"
                          loading="lazy">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                    <div class="absolute bottom-4 left-4 right-4">
-                        <h4 class="text-white font-bold text-xl">${program.name || 'Program'}</h4>
+                    <div class="w-full h-full flex items-center justify-center" style="display: none;">
+                        <i class="fas fa-graduation-cap text-white text-6xl sm:text-7xl md:text-8xl opacity-40 group-hover:scale-110 group-hover:opacity-60 transition-all duration-500"></i>
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+
+                    <!-- Active Badge -->
+                    <div class="absolute top-3 left-3 sm:top-4 sm:left-4">
+                        <span class="px-2 py-1 sm:px-3 sm:py-2 bg-green-500 text-white text-xs font-bold rounded-full shadow-lg flex items-center space-x-1">
+                            <i class="fas fa-check-circle text-xs"></i>
+                            <span class="hidden sm:inline">Active</span>
+                        </span>
+                    </div>
+
+                    <!-- Program Title Overlay -->
+                    <div class="absolute bottom-0 left-0 right-0 p-4 sm:p-5 md:p-6">
+                        <h3 class="text-lg sm:text-xl md:text-2xl font-black text-white mb-1 sm:mb-2 line-clamp-2 leading-tight">${program.name || 'Program'}</h3>
                     </div>
                 </div>
-                <div class="space-y-3">
-                    <p class="text-gray-600 font-semibold flex items-center">
-                        <i class="fas fa-university text-blue-600 mr-2"></i>
-                        ${university.name || program.university_name || 'Top University'}
-                    </p>
-                    <div class="flex items-center justify-between text-sm text-gray-600">
-                        <span class="flex items-center">
-                            <i class="fas fa-clock text-blue-600 mr-2"></i>
-                            ${program.duration || 'Flexible'}
-                        </span>
-                        <span class="flex items-center">
-                            <i class="fas fa-laptop text-blue-600 mr-2"></i>
-                            ${program.mode || 'Online'}
-                        </span>
+
+                <!-- Card Content -->
+                <div class="p-4 sm:p-5 md:p-6 flex-1 flex flex-col">
+                    <!-- University & Details -->
+                    <div class="space-y-2 sm:space-y-3 mb-3 sm:mb-4 flex-shrink-0">
+                        <div class="flex items-center text-gray-700">
+                            <div class="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center mr-2 sm:mr-3 flex-shrink-0">
+                                <i class="fas fa-university text-white text-xs sm:text-sm"></i>
+                            </div>
+                            <span class="font-bold text-sm sm:text-base line-clamp-1">${university.name || program.university_name || 'Top University'}</span>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            <div class="flex items-center text-gray-600">
+                                <i class="fas fa-clock mr-2 text-green-600 w-4 text-xs sm:text-sm flex-shrink-0"></i>
+                                <span class="font-semibold text-xs sm:text-sm line-clamp-1">${program.duration || 'Flexible'}</span>
+                            </div>
+
+                            <div class="flex items-center text-gray-600">
+                                <i class="fas fa-laptop mr-2 text-purple-600 w-4 text-xs sm:text-sm flex-shrink-0"></i>
+                                <span class="font-semibold text-xs sm:text-sm line-clamp-1">${program.mode || 'Online'}</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="flex items-center justify-between pt-3 border-t border-gray-200">
-                        <span class="text-2xl font-bold gradient-text">${fees}</span>
-                        <a href="/programs/${programId}" class="px-4 py-2 bg-blue-600 text-white rounded-full text-sm font-semibold hover:bg-blue-700 transition-colors">
-                            View Details
+
+                    <!-- Description -->
+                    <div class="flex-1 mb-4 sm:mb-5 md:mb-6">
+                        <p class="text-gray-600 text-xs sm:text-sm line-clamp-3 leading-relaxed">${program.description || 'Comprehensive program designed for career growth and professional development'}</p>
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="border-t-2 border-gray-100 pt-3 sm:pt-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4">
+                        <div class="flex-shrink-0">
+                            <p class="text-xs text-gray-500 mb-1 font-semibold">Program Fees</p>
+                            <p class="text-xl sm:text-2xl md:text-3xl font-black gradient-text line-clamp-1">
+                                ${fees}
+                            </p>
+                        </div>
+                        <a href="/programs/${programId}" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 sm:px-5 md:px-6 py-3 sm:py-3.5 md:py-4 rounded-xl sm:rounded-2xl font-semibold text-sm sm:text-base transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:scale-105 flex-shrink-0">
+                            <span>View Details</span>
+                            <i class="fas fa-arrow-right text-xs sm:text-sm"></i>
                         </a>
                     </div>
                 </div>
